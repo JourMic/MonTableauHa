@@ -1,0 +1,437 @@
+title: Hydro-Québec
+path: Vue-Hydro-Quebec-Maison
+icon: mdi:flash
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        icon: mdi:open-in-app
+        heading_style: title
+        heading: Paramètres du compte
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_rate"
+          - tuile3_name: "Tarif"
+          - tuile3_icon: "mdi:playlist-check"
+          - tuile3_color: "red"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_rate_option"
+          - tuile3_name: "Option"
+          - tuile3_icon: "mdi:arrow-all"
+          - tuile3_color: "yellow"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "binary_sensor.hydro_quebec_maison_current_period_epp_enabled"
+          - tuile3_name: "Égaux"
+          - tuile3_icon: "mdi:code-equal"
+          - tuile3_color: "green"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.hydro_quebec_maison_balance"
+          - tuile3_name: "Paiements"
+          - tuile3_icon: "mdi:code-equal"
+          - tuile3_color: "blue"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: heading
+        heading: Coût actuellement et prévisions
+        heading_style: title
+        icon: mdi:currency-usd
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: sensor.hydro_quebec_maison_current_billing_period_total_to_date
+            state_content: state
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: sensor.hydro_quebec_maison_current_billing_period_projected_bill
+        grid_options:
+          columns: full
+          rows: 1
+
+      - type: statistics-graph
+        grid_options:
+          columns: 12
+          rows: 5
+        entities:
+          - entity: sensor.hydro_quebec_maison_current_billing_period_projected_bill
+            name: Prévisions
+            color: red
+          - entity: sensor.hydro_quebec_maison_current_billing_period_total_to_date
+            name: Actuellement
+            color: green
+        days_to_show: 30
+        period: week
+        chart_type: line
+        stat_types:
+          - state
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+
+  - type: grid
+    cards:
+      - type: heading
+        icon: mdi:open-in-app
+        heading_style: title
+        heading: Moyennes par jour pour la période
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_current_day"
+          - tuile3_name: "Nb Jour"
+          - tuile3_icon: "mdi:calendar-month"
+          - tuile3_color: "red"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_average_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer-alert"
+          - tuile3_color: "yellow"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_daily_bill_mean"
+          - tuile3_name: "Paiements"
+          - tuile3_icon: "mdi:currency-usd"
+          - tuile3_color: "green"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_daily_consumption_mean"
+          - tuile3_name: "kWhs"
+          - tuile3_icon: "mdi:lightning-bolt-circle"
+          - tuile3_color: "blue"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: heading
+        heading_style: title
+        heading: kWh actuellement
+        icon: mdi:lightning-bolt-circle
+        grid_options:
+          columns: full
+          rows: 1
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: sensor.hydro_quebec_maison_current_billing_period_total_consumption
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: >-
+              sensor.hydro_quebec_maison_current_billing_period_projected_total_consumption
+ 
+      - type: statistics-graph
+        entities:
+          - entity: sensor.hydro_quebec_maison_current_billing_period_total_consumption
+            color: teal
+        days_to_show: 30
+        period: day
+        chart_type: bar
+        stat_types:
+          - sum
+        hide_legend: true
+        grid_options:
+          columns: 12
+          rows: 5
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+
+badges:
+  - type: entity
+    entity: sensor.meter00_power
+    show_name: false
+    show_state: true
+    show_icon: true
+    tap_action:
+      action: navigate
+      navigation_path: /tableau-ha/Sous-Vue-Consommation-Maison
+
+  - type: entity
+    entity: sensor.hq_pannes_nombre_de_pannes_quebec
+    display_type: complete
+    name: Panne en cours
+    icon: mdi:transmission-tower-off
+    visibility:
+      - condition: state
+        entity: sensor.hq_pannes_nombre_de_pannes_quebec
+        state_not: "0"
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Hydro-Québec - Pannes en cours
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: heading
+                    icon: mdi:transmission-tower-off
+                    heading_style: title
+                    heading: Pannes au Québec
+                  - type: custom:mini-graph-card
+                    entities:
+                      - entity: sensor.hq_pannes_nombre_de_client_touche_quebec
+                        unit: clients affectés
+                        show_graph: true
+                        show_state: true
+                      - entity: sensor.hq_pannes_nombre_de_pannes_quebec
+                        name: Interruptions
+                        unit: pannes
+                        show_graph: false
+                        show_state: true
+                      - entity: sensor.hq_pannes_nombre_de_client_raccorde_quebec
+                        name: Clients
+                        unit: Clients
+                        show_graph: false
+                        show_state: true
+                      - entity: sun.sun
+                        show_line: false
+                        show_points: false
+                        show_legend: false
+                        color: gray
+                        y_axis: secondary
+                    state_map:
+                      - value: below_horizon
+                        label: Nuit
+                      - value: above_horizon
+                        label: Jour
+                    hours_to_show: 24
+                    points_per_hour: 4
+                    animate: true
+                    line_width: 3
+                    show:
+                      name: false
+                      icon: false
+                      extrema: true
+                      fill: fade
+                    hour24: true
+                  - type: markdown
+                    content: "---"
+                  - type: heading
+                    icon: mdi:transmission-tower-off
+                    heading_style: title
+                    heading: Pannes en Mauricie
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: Nombres de clients
+                        secondary: >-
+                          {{states('sensor.hq_pannes_nombre_de_client_raccorde_mauricie')}}
+                        icon: mdi:account-group
+                        icon_color: lightblue
+                        fill_container: true
+                        layout: vertical
+                        tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            ha-tile-info$: |
+                              .secondary {
+                                 font-size: 18px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: Nombres de pannes
+                        secondary: >-
+                          {{states('sensor.hq_pannes_nombre_de_pannes_mauricie')}}
+                        icon: mdi:transmission-tower-off
+                        icon_color: red
+                        fill_container: true
+                        layout: vertical
+                        tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            ha-tile-info$: |
+                              .secondary {
+                                 font-size: 18px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: Clients affectés
+                        secondary: >-
+                          {{states('sensor.hq_pannes_nombre_de_client_touche_mauricie')}}
+                        icon: mdi:home-account
+                        icon_color: yellow
+                        fill_container: true
+                        layout: vertical
+                        tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            ha-tile-info$: |
+                              .secondary {
+                                 font-size: 18px !important;
+                              }
+                  - type: markdown
+                    content: "---"
+                  - type: heading
+                    icon: mdi:transmission-tower-off
+                    heading_style: title
+                    heading: Pannes pour la ville de Shawinigan-sud
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: Nombres de clients
+                        secondary: >-
+                          {{states('sensor.hq_pannes_nombre_de_client_raccorde_shawinigan_sud')}}
+                        icon: mdi:account-group
+                        icon_color: lightblue
+                        fill_container: true
+                        layout: vertical
+                        tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            ha-tile-info$: |
+                              .secondary {
+                                 font-size: 18px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: Nombres de pannes
+                        secondary: >-
+                          {{states('sensor.hq_pannes_nombre_de_pannes_shawinigan_sud')}}
+                        icon: mdi:transmission-tower-off
+                        icon_color: red
+                        fill_container: true
+                        layout: vertical
+                        tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            ha-tile-info$: |
+                              .secondary {
+                                 font-size: 18px !important;
+                              }
+                      - type: custom:mushroom-template-card
+                        primary: Clients affectés
+                        secondary: >-
+                          {{states('sensor.hq_pannes_nombre_de_client_touche_shawinigan_sud')}}
+                        icon: mdi:home-account
+                        icon_color: yellow
+                        fill_container: true
+                        layout: vertical
+                        tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        card_mod:
+                          style:
+                            ha-tile-info$: |
+                              .secondary {
+                                 font-size: 18px !important;
+                              }
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+
+  - type: entity
+    entity: sensor.hydro_peak_probability
+    name: Pointe?
+    show_name: true
+    icon: mdi:transmission-tower
+    tap_action:
+      action: navigate
+      navigation_path: /tableau-ha/Sous-Vue-Defis
+    card_mod:
+      style:  |
+        :host {
+          {% set pointe = states('sensor.hydro_peak_probability') | float(0) %}
+          {% if pointe < 50 %} --card-mod-icon-color: var(--couleur_vert) !important;
+          {% else %} --card-mod-icon-color: var(--couleur_rouge) !important;
+          {% endif %}
+        } 
+        
+  - type: entity
+    entity: sensor.hydro_quebec_production_total
+    name: Production
+    show_name: true
+    icon: mdi:transmission-tower
+    tap_action:
+      action: navigate
+      navigation_path: /tableau-ha/Sous-vue-hydro-quebec
+
+
+
+
+
+

@@ -1,0 +1,502 @@
+title: Conditions
+path: Vue-Conditions
+icon: mdi:home-analytics
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: Salon
+        heading_style: title
+        icon: mdi:molecule-co2
+        grid_options:
+          columns: 6
+          rows: 0.6
+
+      - type: heading
+        heading: Chambre des maîtres
+        heading_style: title
+        icon: mdi:molecule-co2
+        grid_options:
+          columns: 6
+          rows: 0.6
+
+      - type: heading
+        heading_style: title
+        icon: mdi:checkbox-marked-circle-outline
+        badges:
+          - type: entity
+            entity: sensor.netatmo_salon_co2_text
+        heading: État
+        grid_options:
+          columns: 6
+          rows: 0.6
+
+      - type: heading
+        heading_style: title
+        icon: mdi:checkbox-marked-circle-outline
+        badges:
+          - type: entity
+            entity: sensor.netatmo_chambre_maitres_co2_text
+        heading: État
+        grid_options:
+          columns: 6
+          rows: 0.6
+
+      - type: custom:decluttering-card
+        template: tuiles_5
+        variables:
+          - tuile5_entity: "sensor.maison_dioxyde_de_carbone"
+          - tuile5_name: "Salon"
+        grid_options:
+          columns: 6
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_5
+        variables:
+          - tuile5_entity: "sensor.maison_chambre_des_maitres_dioxyde_de_carbone"
+          - tuile5_name: "Chambre des maîtres"
+        grid_options:
+          columns: 6
+          rows: auto
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        heading: Salon
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_bruit
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        heading: Cuisine
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.maison_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.maison_humidite"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.sensibo_temperature_courante_cuisine"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.sensibo_humiditee_courante_cuisine"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: heading
+        heading: Salle à manger
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_salle_a_manger_battery
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        heading: Salle d’eau
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_salle_deau_battery
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_salle_a_manger_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_salle_a_manger_humidity"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_salle_deau_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_salle_deau_humidity"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        heading: Chambre des maîtres
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_chambre_des_maitres_batterie
+
+      - type: heading
+        heading: Bureau
+        heading_style: title
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_bureau_batterie
+        grid_options:
+          columns: 6
+          rows: 0.6
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.maison_chambre_des_maitres_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.maison_chambre_des_maitres_humidite"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.maison_bureau_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.maison_bureau_humidite"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Bureau
+        heading_style: title
+        icon: mdi:molecule-co2
+        grid_options:
+          columns: 6
+          rows: 0.6
+
+      - type: heading
+        heading: Sous-Sol
+        heading_style: title
+        icon: mdi:molecule-co2
+        grid_options:
+          columns: 6
+          rows: 0.6
+
+      - type: heading
+        heading_style: title
+        icon: mdi:checkbox-marked-circle-outline
+        badges:
+          - type: entity
+            entity: sensor.netatmo_bureau_co2_text
+        heading: État
+        grid_options:
+          columns: 6
+          rows: 0.6
+
+      - type: heading
+        heading_style: title
+        icon: mdi:checkbox-marked-circle-outline
+        badges:
+          - type: entity
+            entity: sensor.netatmo_sous_sol_co2_text
+        heading: État
+        grid_options:
+          columns: 6
+          rows: 0.6
+
+      - type: custom:decluttering-card
+        template: tuiles_5
+        variables:
+          - tuile5_entity: "sensor.maison_bureau_dioxyde_de_carbone"
+          - tuile5_name: "Bureau"
+        grid_options:
+          columns: 6
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_5
+        variables:
+          - tuile5_entity: "sensor.maison_sous_sol_dioxyde_de_carbone"
+          - tuile5_name: "Sous-sol"
+        grid_options:
+          columns: 6
+          rows: auto
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        heading: Salle de bain
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_salle_de_bain_battery
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        heading: Salle de repos
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.boudoirte_batterie
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_salle_de_bain_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_salle_de_bain_humidity"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.sensibo_temperature_courante_salle_de_repos"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.sensibo_humiditee_courante_salle_de_repos"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        heading: Sous-Sol
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_sous_sol_batterie
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        heading: Chambre des invités
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_chambre_invites_battery
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.maison_sous_sol_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.maison_sous_sol_humidite"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_chambre_invites_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_chambre_invites_humidity"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.6
+        heading: Atelier
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_atelier_battery
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Thermopompe
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_thermopompe_batterie
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_atelier_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_atelier_humidity"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.maison_thermopompe_temperature"
+          - tuile3_name: "Température"
+          - tuile3_icon: "mdi:thermometer"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "sensor.govee_chambre_invites_humidity"
+          - tuile3_name: "Humidité"
+          - tuile3_icon: "mdi:water-percent"
+        grid_options:
+          columns: 3
+          rows: auto

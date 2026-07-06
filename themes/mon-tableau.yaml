@@ -1,0 +1,25 @@
+MonTableau:
+
+# Enlever les lignes dans markdown
+  markdown-table-border-width: 0px
+ 
+# Tableau Météo
+
+  couleur_blanc: '#FFFFFF'
+  couleur_noir: '#000000'
+  couleur_lila: '#BCD5D7'
+  couleur_bleu: '#90D5FF'
+  couleur_vert: '#00ff13'
+  couleur_jaune: '#FFED52'
+  couleur_orange: '#FDBA6F'
+  couleur_rouge: '#FF2C2C'
+ 
+# Tableau principal 
+  
+  couleur_ombre_bleu: 'rgba(30, 196, 229, 0.5) 1px 13px 27px 0px, rgba(212, 244, 250, 0.5) 0px 8px 16px -8px'
+
+  modes:
+    light: {}
+    
+    dark: 
+      lovelace-background: 'center / cover no-repeat url("/local/background/dark.jpg") fixed'

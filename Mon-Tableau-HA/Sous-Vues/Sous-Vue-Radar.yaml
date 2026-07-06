@@ -1,0 +1,26 @@
+title: Radar
+path: Sous-Vue-Radar
+icon: mdi:radar
+subview: true
+type: sections
+max_columns: 3
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: custom:weather-radar-card
+        map_style: Satellite
+        data_source: RainViewer-TWC
+        show_recenter: true
+        show_marker: true
+        show_scale: false
+        show_playback: true
+        show_range: false
+        extra_labels: false
+        zoom_level: 8
+        show_zoom: true
+        height: 700px
+        grid_options:
+          columns: 36
+          rows: auto
+    column_span: 3

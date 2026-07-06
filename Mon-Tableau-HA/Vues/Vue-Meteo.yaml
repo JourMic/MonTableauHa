@@ -1,0 +1,325 @@
+title: Météo
+path: Vue-Meteos
+icon: mdi:weather-partly-lightning
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading_style: title
+        icon: mdi:weather-partly-snowy-rainy
+        heading: Prévisions
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: custom:weather-forecast-card
+        entity: weather.pirateweather
+        show_current: true
+        show_forecast: true
+        name: Shawinigan-Sud
+        default_forecast: daily
+        temperature_entity: sensor.st_00032986_temperature
+        show_condition_effects:
+          - rain
+          - snow
+          - lightning
+          - moon
+          - sun
+          - sky
+        current:
+          show_attributes:
+            - name: humidity
+              entity: sensor.st_00032986_humidite
+            - name: pressure
+              entity: sensor.st_00032986_pression_atmospherique
+            - name: uv_index
+              entity: sensor.st_00032986_index_uv
+            - name: visibility
+              entity: sensor.shawinigan_sud_sensors_visibility
+          secondary_info_attribute: apparent_temperature
+        forecast:
+          mode: chart
+          extra_attribute: wind_direction
+          scroll_to_selected: true
+          use_color_thresholds: true
+          daily_slots: 7
+        forecast_action: {}
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+        grid_options:
+          columns: 12
+          rows: full
+
+  - type: grid
+    cards:
+      - type: heading
+        heading_style: title
+        icon: mdi:eye
+        heading: Vent
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: custom:windrose-card
+        title: Direction du vent
+        data_period:
+          period_back: "-4h"
+        refresh_interval: 300
+        windspeed_bar_location: right
+        buttons_config:
+          location: bottom
+          buttons:
+            - type: period_selector
+              button_text: 1 heure
+              period_back: "-1h"
+            - type: period_selector
+              button_text: 4 heures
+              period_back: "-4h"
+        wind_direction_entity:
+          entity: sensor.st_00032986_direction_du_vent
+          use_statistics: false
+          direction_compensation: 0
+        windspeed_entities:
+          - entity: sensor.st_00032986_vitesse_du_vent
+            name: Vitesse
+            speed_unit: auto
+            output_speed_unit: kph
+            speed_range_beaufort: false
+            windspeed_bar_full: true
+            current_speed_arrow: true
+            use_statistics: false
+          - entity: sensor.st_00032986_rafales
+            name: Rafale
+            speed_unit: auto
+            output_speed_unit: kph
+            speed_range_beaufort: false
+            windspeed_bar_full: true
+            current_speed_arrow: true
+            use_statistics: false
+        matching_strategy:
+          name: direction-first
+        rose_config:
+          windrose_draw_north_offset: 0
+          center_calm_percentage: true
+        current_direction:
+          show_arrow: true
+        corner_info:
+          top_left:
+            label: Vitesse
+            unit: null
+            entity: sensor.st_00032986_vitesse_du_vent
+          bottom_left:
+            label: Rafale
+            unit: null
+            entity: sensor.st_00032986_rafales
+          top_right:
+            label: Direction
+            unit: °
+            color: red
+            entity: sensor.st_00032986_direction_du_vent
+          bottom_right:
+            label: Moyenne
+            unit: null
+            entity: sensor.weatherflow_direction_moyenne_du_vent
+        direction_labels:
+          cardinal_direction_letters: NESO
+          show_cardinal_directions: true
+          show_intercardinal_directions: true
+          show_secondary_intercardinal_directions: true
+          cardinal_directions_text_size: 60
+          intercardinal_directions_text_size: 45
+          secondary_intercardinal_directions_text_size: 30
+        grid_options:
+          columns: 12
+          rows: full
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+
+badges:
+  - type: entity
+    entity: sensor.shawinigan_sud_sensors_precipitation_today
+    show_name: false
+    show_state: true
+    show_icon: true
+    tap_action:
+      action: navigate
+      navigation_path: /tableau-ha/Sous-Vue-Pluie
+
+  - type: entity
+    entity: sensor.shawinigan_sud_sensors_precipitation_today
+    show_name: true
+    show_state: false
+    show_icon: true
+    icon: mdi:radar
+    name: Radar
+    tap_action:
+      action: navigate
+      navigation_path: /tableau-ha/Sous-Vue-Radar
+
+  - type: entity
+    show_name: false
+    show_state: true
+    show_icon: true
+    color: red
+    entity: sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: IQA
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+                cards:
+                  - type: custom:mini-graph-card
+                    icon: mdi:air-purifier
+                    name: IQA
+                    hours_to_show: 128
+                    hour24: true
+                    show:
+                      extrema: true
+                      graph: bar
+                      name: true
+                      icon: true
+                      state: true
+                    entities:
+                      - entity: sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
+                    color_thresholds:
+                      - value: 0
+                        color: green
+                      - value: 51
+                        color: yellow
+                      - value: 101
+                        color: orange
+                      - value: 151
+                        color: red
+                      - value: 201
+                        color: purple
+                      - value: 301
+                        color: brown
+                  - show_name: true
+                    show_icon: true
+                    show_state: true
+                    type: glance
+                    entities:
+                      - entity: sensor.mauricie_quebec_canada_pm2_5
+                        icon: mdi:air-filter
+                        name: PM 2.5
+                      - entity: sensor.mauricie_quebec_canada_ozone
+                        name: Ozone
+                        icon: mdi:chart-box-outline
+                      - entity: sensor.mauricie_quebec_canada_dominant_pollutant
+                        icon: mdi:arrow-up-bold-circle
+                        name: Dominant
+
+  - type: entity
+    show_name: false
+    show_state: true
+    show_icon: true
+    icon: mdi:sun-wireless
+    color: cyan
+    entity: sensor.st_00032986_index_uv
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: UV
+          content:
+            type: entities
+            entities:
+              - type: custom:mini-graph-card
+                icon: mdi:sun-wireless
+                name: Index UV
+                hours_to_show: 120
+                hour24: true
+                show:
+                  extrema: true
+                  graph: bar
+                  name: true
+                  icon: true
+                  state: true
+                entities:
+                   - entity: sensor.st_00032986_index_uv
+                color_thresholds:
+                  - value: 0
+                    color: green
+                  - value: 3
+                    color: yellow
+                  - value: 6
+                    color: orange
+                  - value: 11
+                    color: red
+ 
+  - type: entity
+    show_name: false
+    show_state: true
+    show_icon: true
+    color: orange
+    entity: sensor.shawinigan_sud_sensors_lightning_strikes_last_3_hours
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Nombre d'éclaire
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+                cards:
+                  - type: glance
+                    show_name: true
+                    show_icon: true
+                    show_state: true
+                    entities:
+                      - entity: sensor.shawinigan_sud_sensors_lightnings_strikes
+                        tap_action:
+                          action: none
+                        name: 1 Minute
+                      - entity: >-
+                          sensor.shawinigan_sud_sensors_lightning_strikes_last_hour
+                        tap_action:
+                          action: none
+                        name: 1 Heure
+                      - entity: >-
+                          sensor.shawinigan_sud_sensors_lightning_strikes_last_3_hours
+                        tap_action:
+                          action: none
+                        name: 3 Heures
+                      - entity: >-
+                          sensor.shawinigan_sud_sensors_distance_last_lightning_strike
+                        tap_action:
+                          action: none
+                        name: Distance
+                    title: "Foudres Détectés "
+                    state_color: true
+                    card_mod:
+                      style: |
+                        :host {
+                          font-size: 24px; 
+                          height: 60px;
+                        }

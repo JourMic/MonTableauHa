@@ -1,0 +1,337 @@
+title: Statut
+path: Vue-Statuts
+icon: mdi:list-status
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+    
+      - type: heading
+        heading_style: title
+        icon: mdi:speedometer
+        heading: Internet
+        grid_options:
+          columns: full
+          rows: 0.4
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.speedtest_download
+            icon: mdi:arrow-down
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.speedtest_upload
+            icon: mdi:arrow-up
+
+      - type: statistics-graph
+        entities:
+          - entity: sensor.speedtest_download
+            name: Téléchargement
+          - entity: sensor.speedtest_upload
+            name: Téléversement
+        days_to_show: 1
+        period: hour
+        chart_type: line
+        stat_types:
+          - mean
+          - min
+          - max
+        min_y_axis: -50
+        max_y_axis: 150
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+        grid_options:
+          columns: 12
+          rows: full
+
+      - type: heading
+        icon: mdi:flower
+        heading: Plante
+        heading_style: title
+        badges:
+          - type: entity
+            entity: sensor.plant_sensor_8e01_temperature
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: plant-status
+        entity: plant.lis_de_la_paix
+        name: Lis de la paix
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+        grid_options:
+          columns: 12
+          rows: full
+
+  - type: grid
+    cards:
+
+      - type: heading
+        heading_style: title
+        icon: mdi:ear-hearing
+        heading: Bruit
+        badges:
+          - type: entity
+            entity: sensor.maison_bruit
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: history-graph
+        grid_options:
+          columns: full
+          rows: auto
+        entities:
+          - sensor.maison_bruit
+        hours_to_show: 24
+        show_names: false
+        min_y_axis: 30
+        max_y_axis: 70
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+
+      - type: heading
+        heading: Imprimante Canon Pro-100
+        heading_style: title
+        icon: mdi:printer
+        badges:
+          - type: entity
+            entity: sensor.canon_pro_100_series
+        grid_options:
+          columns: full
+          rows: 0.4
+          
+      - type: custom:auto-entities
+        card:
+          type: grid
+          columns: 4
+        card_param: cards
+        filter:
+          include:
+            - options:
+                type: gauge
+#                needle: true
+                min: 0
+                max: 100
+                severity:
+                  green: 66
+                  yellow: 33
+                  red: 0
+                card_mod:
+                  style: |
+                   ha-card {
+                     box-shadow: var(--couleur_ombre_bleu) !important;
+                   }
+              attributes:
+                marker_type: inkCartridge
+              domain: sensor
+        sort:
+          method: state
+          numeric: true
+        show_empty: false
+        grid_options:
+          columns: full
+          rows: auto
+
+badges:
+
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    color: ""
+    entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+    name: Essence
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Prix de l'essence
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+                cards:
+                  - type: entities
+                    entities:
+                      - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+                        type: custom:multiple-entity-row
+                        show_state: false
+                        name: Shawinigan
+                        secondary_info: last-changed
+                        entities:
+                          - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+                            name: Actuel
+                            unit: $
+                          - entity: sensor.caa_prix_essence_shawinigan_un_mois
+                            name: 1 Mois
+                            unit: $
+                          - entity: sensor.caa_prix_essence_shawinigan_un_an
+                            name: 1 An
+                            unit: $
+                      - type: section
+                      - entity: sensor.caa_prix_essence_montreal_aujourd_hui
+                        type: custom:multiple-entity-row
+                        show_state: false
+                        name: Montréal
+                        secondary_info: last-changed
+                        entities:
+                          - entity: sensor.caa_prix_essence_montreal_aujourd_hui
+                            name: Actuel
+                            unit: $
+                          - entity: sensor.caa_prix_essence_montreal_un_mois
+                            name: 1 Mois
+                            unit: $
+                          - entity: sensor.caa_prix_essence_montreal_un_an
+                            name: 1 An
+                            unit: $
+                      - type: section
+                      - entity: sensor.caa_prix_essence_quebec_aujourd_hui
+                        type: custom:multiple-entity-row
+                        show_state: false
+                        name: Québec
+                        secondary_info: last-changed
+                        entities:
+                          - entity: sensor.caa_prix_essence_quebec_aujourd_hui
+                            name: Actuel
+                            unit: $
+                          - entity: sensor.caa_prix_essence_quebec_un_mois
+                            name: 1 Mois
+                            unit: $
+                          - entity: sensor.caa_prix_essence_quebec_un_an
+                            name: 1 An
+                            unit: $
+                      - type: section
+                      - entity: sensor.caa_prix_essence_trois_rivieres_aujourd_hui
+                        type: custom:multiple-entity-row
+                        show_state: false
+                        name: Trois-Rivières
+                        secondary_info: last-changed
+                        entities:
+                          - entity: sensor.caa_prix_essence_trois_rivieres_aujourd_hui
+                            name: Actuel
+                            unit: $
+                          - entity: sensor.caa_prix_essence_trois_rivieres_un_mois
+                            name: 1 Mois
+                            unit: $
+                          - entity: sensor.caa_prix_essence_trois_rivieres_un_an
+                            name: 1 An
+                            unit: $
+                      - type: section
+                  - type: custom:mini-graph-card
+                    hours_to_show: 720
+                    name: Prix quotidien sur 1 mois
+                    entities:
+                      - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+                        aggregate_func: max
+                        name: Max
+                        color: "#e74c3c"
+                      - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+                        aggregate_func: min
+                        name: Min
+                      - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+                        aggregate_func: avg
+                        name: Moy
+                        color: green
+
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    color: ""
+    entity: sensor.shawinigan_sud_sensors_voltage
+    name: Pile Tempest
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Statut de la station météo Tempest
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:vertical-stack-in-card
+                    card_mod:
+                      style: |
+                        ha-card {
+                          box-shadow: 0 0 0 2px gray;
+                        }
+                    cards:
+                      - type: markdown
+                        content: >-
+                          Mode :
+                          {{states('sensor.shawinigan_sud_sensors_power_save_mode')
+                          }}
+                                 {{ states('sensor.weatherflow_mode_descption') }}
+                        text_only: true
+                      - type: custom:apexcharts-card
+                        experimental:
+                          color_threshold: true
+                        graph_span: 72h
+                        show:
+                          last_updated: false
+                        header:
+                          standard_format: false
+                          show: true
+                          show_states: true
+                          colorize_states: true
+                          title: Station Tempest
+                        span:
+                          start: day
+                        apex_config:
+                          chart:
+                            height: 190px
+                        yaxis:
+                          - id: pile
+                            decimals: 0
+                            apex_config:
+                              tickAmount: 4
+                            max: 4
+                            min: 0
+                        series:
+                          - entity: sensor.shawinigan_sud_sensors_voltage
+                            yaxis_id: pile
+                            type: area
+                            group_by:
+                              func: last
+                              duration: 15m
+                            stroke_width: 3
+                            show:
+                              header_color_threshold: true
+                            color_threshold:
+                              - value: 0
+                                color: red
+                              - value: 1
+                                color: orange
+                              - value: 2
+                                color: yellow
+                              - value: 3
+                                color: green
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }

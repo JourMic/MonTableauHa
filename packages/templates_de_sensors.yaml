@@ -1,0 +1,33 @@
+template:
+
+  - sensor:
+  
+      - name: "Periodes du jours"
+        unique_id: "periodes_du_jours"
+        icon: mdi:molecule-co2
+        state: >
+          {% if now().hour < 6 %} 🌙 Bonne nuit Michel! %}
+          {% elif now().hour < 12 %} ☕️ Bon matin Michel! %}
+          {% elif now().hour < 18 %} 😎 Bon après-midi Michel! %}
+          {% else %} ⭐️ Bonne soirée Michel!{% endif %} 
+ 
+      - name: "Date du jour"
+        unique_id: "date_du_jour"
+        state: >
+          {% set months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"] %}
+          {% set days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"] %}
+          {% set month = months[now().strftime('%m') | int -1] %}  
+          {% set day = days[now().strftime('%w') | int -1] %}  
+          {{ day + ' ' + now().strftime('%d') + ' ' + month }}
+
+      - name: "Brosse à dents traduire état"
+        icon: mdi:toothbrush-paste
+        unique_id: "brosse_a_dents_traduire_etat_100"
+        state: >
+          {% if is_state('sensor.smart_series_9000_10000_b259', 'running') %}
+             En fonction
+          {% elif is_state('sensor.smart_series_9000_10000_b259', 'idle') %}
+             Arrêtée
+          {% else %}
+            {{ states('sensor.smart_series_9000_10000_b259') }}
+          {% endif %}

@@ -1,0 +1,1002 @@
+title: Principale
+path: Vue-principale
+icon: mdi:home-account
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: "Météo "
+        icon: mdi:weather-partly-rainy
+        entities:
+          - show_state: true
+            show_icon: true
+            entity: sensor.st_00032986_temperature
+        grid_options:
+          columns: full
+          rows: 0.3
+
+      - type: custom:weather-forecast-card
+        show_current: true
+        show_forecast: true
+        default_forecast: hourly
+        tap_action:
+          action: more-info
+        entity: weather.pirateweather
+        name: Shawinigan-Sud
+        show_condition_effects: true
+        temperature_entity: sensor.st_00032986_temperature
+        forecast:
+          mode: simple
+          show_sun_times: true
+          default_chart_attribute: temperature_and_precipitation
+          extra_attribute: precipitation_probability
+          scroll_to_selected: true
+          use_color_thresholds: true
+          show_attribute_selector: true
+        forecast_action:
+          tap_action:
+            action: toggle-forecast
+          hold_action:
+            action: select-forecast-attribute
+        grid_options:
+          columns: 12
+          rows: auto
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+
+      - type: heading
+        heading: Personnes
+        icon: mdi:account
+        grid_options:
+          columns: full
+          rows: 0.3
+
+      - type: custom:decluttering-card
+        template: life360_personnes
+        variables:
+          - life360_nom: "Brigitte"
+          - life360_personne: "person.brigitte"
+          - life360_pile: "sensor.life360_pile_tel_brigitte"
+          - life360_charge: "sensor.life360_pile_tel_en_charge_brigitte"
+          - life360_deplacement: "sensor.life360_en_deplacement_brigitte"
+          - life360_vitesse: "sensor.life360_vitesse_brigitte"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: life360_personnes
+        variables:
+          - life360_nom: "Valérie"
+          - life360_personne: "person.valerie"
+          - life360_pile: "sensor.life360_pile_tel_valerie"
+          - life360_charge: "sensor.life360_pile_tel_en_charge_valerie"
+          - life360_deplacement: "sensor.life360_en_deplacement_valerie"
+          - life360_vitesse: "sensor.life360_vitesse_valerie"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: life360_personnes
+        variables:
+          - life360_nom: "Claude"
+          - life360_personne: "person.claude"
+          - life360_pile: "sensor.life360_pile_tel_claude"
+          - life360_charge: "sensor.life360_pile_tel_en_charge_claude"
+          - life360_deplacement: "sensor.life360_en_deplacement_claude"
+          - life360_vitesse: "sensor.life360_vitesse_claude"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: life360_personnes
+        variables:
+          - life360_nom: "Michel"
+          - life360_personne: "person.nasdemichel"
+          - life360_pile: "sensor.life360_pile_tel_michel"
+          - life360_charge: "sensor.life360_pile_tel_en_charge_michel"
+          - life360_deplacement: "sensor.life360_en_deplacement_michel"
+          - life360_vitesse: "sensor.life360_vitesse_michel"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: heading
+        icon: mdi:lightbulb
+        heading: Éclairages
+        grid_options:
+          columns: full
+          rows: 0.3
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "light.salon"
+          - tuile3_name: "Lampes"
+          - tuile3_icon: "mdi:lamps"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "light.lecture"
+          - tuile3_name: "Lecture"
+          - tuile3_icon: "mdi:desk-lamp"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "light.brilliant_1g_8d1c0112b0_huche_du_salon"
+          - tuile3_name: "Huche"
+          - tuile3_icon: "hue:bulb-group-recessed-ceiling"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "light.govee_tele"
+          - tuile3_name: "Govee"
+          - tuile3_icon: "mdi:television-ambient-light"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "light.exterieure_avant"
+          - tuile3_name: "Avant"
+          - tuile3_icon: "hue:floor-lantern-group"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "light.neviweb130_lumiere_exterieurs_arriere"
+          - tuile3_name: "Arrière"
+          - tuile3_icon: "hue:ceiling-fugato-two-alt"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "light.brilliant_3g_787ddeb5e2_table"
+          - tuile3_name: "Table"
+          - tuile3_icon: "hue:ensis"
+        grid_options:
+          columns: 3
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "light.brilliant_3g_787ddeb5e2_vestibule_avant"
+          - tuile3_name: "Vestibule"
+          - tuile3_icon: "hue:ceiling-fugato-three-alt"
+        grid_options:
+          columns: 3
+          rows: auto
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Agenda
+        icon: mdi:calendar-month-outline
+        grid_options:
+          columns: full
+          rows: 0.3
+
+      - type: custom:calendar-card-pro
+        entities:
+          - entity: calendar.agenda_de_michel
+            color: white
+          - entity: calendar.sports_de_michel
+            color: yellow
+          - entity: calendar.anniversaires_de_michel
+            color: orange
+          - entity: calendar.anniversaires
+            color: orange
+          - entity: calendar.jours_feries_de_michel
+            color: cyan
+        days_to_show: 20
+        compact_days_to_show: 3
+        compact_events_to_show: 5
+        compact_events_complete_days: true
+        language: fr
+        accent_color: "#baf1ff"
+        vertical_line_width: 5px
+        event_spacing: 5px
+        show_current_week_number: false
+        day_separator_width: 2px
+        day_separator_color: "#baf1ff80"
+        week_separator_width: 1px
+        month_separator_width: 1.5px
+        month_separator_color: var(--secondary-text-color)
+        today_indicator: 🔴
+        date_vertical_alignment: ""
+        weekday_font_size: 15px
+        weekday_color: "#baf1ff"
+        day_font_size: 25px
+        day_color: "#baf1ff"
+        month_color: "#baf1ff"
+        weekend_weekday_color: "#E67C73"
+        weekend_day_color: "#E67C73"
+        weekend_month_color: "#E67C73"
+        today_day_color: red
+        show_progress_bar: false
+        progress_bar_color: "#03a9f4"
+        progress_bar_height: 10px
+        event_color: "#baf1ff"
+        time_24h: true
+        time_color: "#baf1ff"
+        time_icon_size: 15px
+        refresh_interval: 15
+        row_spacing: 10px
+        remove_location_country_selector: "false"
+        tap_action:
+          action: expand
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+            /* Make today's events stand out */
+            .day-table.today .event-title {
+              font-size: 16px !important;     /* Larger text */
+              font-weight: bold !important;   /* Bold text */
+              color: red !important; /* Use theme accent color */
+            }
+
+            div.event-content {
+              display: grid;
+              grid-template-areas: 
+              "title time"
+              "location location";
+              grid-template-columns: 1fr auto;
+              column-gap: 10px;
+              row-gap: 0px;
+            }
+
+            div.summary {
+              grid-area: title;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+
+            div.time {
+              grid-area: time;
+              white-space: nowrap;
+            }
+
+            div.location {
+              grid-area: location;
+              white-space: normal;
+              overflow: hidden;
+              text-overflow: ellipsis;
+             }
+
+            div.time-location {
+              display: contents;
+            }
+
+      - type: heading
+        icon: mdi:cctv
+        heading: Caméras
+        grid_options:
+          columns: full
+          rows: 0.3
+
+      - type: custom:decluttering-card
+        template: tuiles_4
+        variables:
+          - tuile4_entity: "alarm_control_panel.blink_ca_exterieures"
+        grid_options:
+          columns: 6
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_4
+        variables:
+          - tuile4_entity: "alarm_control_panel.blink_ca_interieures"
+        grid_options:
+          columns: 6
+          rows: auto
+
+      - type: heading
+        icon: mdi:heat-wave
+        heading: Chauffage
+        entities:
+          - show_state: true
+            show_icon: true
+            entity: sensor.thermopompe_temperature
+        grid_options:
+          columns: full
+          rows: 0.3
+
+      - type: custom:decluttering-card
+        template: tuiles_2
+        variables:
+          - tuile2_entity: "climate.sensibo_cuisine"
+          - tuile2_name: "Cuisine"
+        grid_options:
+          columns: 6
+          rows: auto
+
+      - type: custom:decluttering-card
+        template: tuiles_2
+        variables:
+          - tuile2_entity: "climate.sensibo_salle_de_repos"
+          - tuile2_name: "Salle de repos"
+        grid_options:
+          columns: 6
+          rows: auto
+
+badges:
+  - type: entity
+    entity: sensor.st_00032986_vitesse_du_vent
+    name: Vent
+    display_type: complete
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Vent
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+                cards:
+                  - type: custom:ring-tile
+                    entity: sensor.st_00032986_vitesse_du_vent
+                    marker: sensor.st_00032986_direction_du_vent
+                    ring_type: compass_nesw
+                    ring_size: 3
+                    top_element: marker_dir
+                    middle_element: value_with_unit
+                  - type: glance
+                    entities:
+                      - entity: sensor.shawinigan_sud_sensors_wind_lull
+                        name: Acalmie
+                      - entity: sensor.shawinigan_sud_sensors_wind_gust
+                        name: Rafales
+                      - entity: sensor.st_00032986_vitesse_moyenne_du_vent
+                        name: Moyenne
+
+  - type: entity
+    entity: sensor.shawinigan_sud_sensors_precipitation_today
+    name: Pluie
+    display_type: complete
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Pluie
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+                cards:
+                  - type: custom:rain-gauge-card
+                    entity: sensor.shawinigan_sud_sensors_precipitation_today
+                    hourly_rate_entity: sensor.st_00032986_intensite_des_precipitations
+                    name: Aujourd’hui
+                    language: fr
+                    max_level: "80"
+                    border_colour: Blue
+                  - type: custom:rain-gauge-card
+                    entity: >-
+                      sensor.shawinigan_sud_sensors_precipitation_yesterday
+                    name: Hier
+                    language: fr
+                    max_level: "80"
+                    border_colour: yellow
+
+  - type: entity
+    entity: sensor.soleil_lever
+    display_type: complete
+    name: Soleil
+    visibility:
+      - condition: state
+        entity: sun.sun
+        state: below_horizon
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Soleil Lune
+          content:
+            type: entities
+            entities:
+              - type: custom:horizon-card
+                title: Horizon
+                moon: true
+                refresh_period: 60
+                fields:
+                  sunrise: true
+                  sunset: true
+                  dawn: true
+                  noon: true
+                  dusk: true
+                  azimuth: true
+                  sun_azimuth: true
+                  moon_azimuth: true
+                  elevation: true
+                  sun_elevation: true
+                  moon_elevation: true
+                  moonrise: true
+                  moonset: true
+                  moon_phase: true
+                southern_flip: false
+                language: fr
+                time_format: language
+                number_format: language
+                no_card: false
+                debug_level: 0
+                moon_phase_rotation: -10
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+
+  - type: entity
+    entity: sensor.soleil_coucher
+    name: Soleil
+    display_type: complete
+    visibility:
+      - condition: state
+        entity: sun.sun
+        state: above_horizon
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Soleil Lune
+          content:
+            type: entities
+            entities:
+              - type: custom:horizon-card
+                title: Horizon
+                moon: true
+                refresh_period: 60
+                fields:
+                  sunrise: true
+                  sunset: true
+                  dawn: true
+                  noon: true
+                  dusk: true
+                  azimuth: true
+                  sun_azimuth: true
+                  moon_azimuth: true
+                  elevation: true
+                  sun_elevation: true
+                  moon_elevation: true
+                  moonrise: true
+                  moonset: true
+                  moon_phase: true
+                southern_flip: false
+                language: fr
+                time_format: language
+                number_format: language
+                no_card: false
+                debug_level: 0
+                moon_phase_rotation: -10
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+  - type: custom:lunar-phase-badge
+    location_source: default
+    entity: sensor.moon_phase
+    southern_hemisphere: false
+    language: fr
+    number_decimals: 2
+    mile_unit: false
+    12hr_format: false
+    icon_type: image
+    custom_name: false
+    name: phaseName
+    show_name: true
+    show_icon: true
+    show_state: true
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Phases de la lune
+          content:
+            type: entities
+            entities:
+              - type: custom:lunar-phase-card
+                entity: ""
+                12hr_format: false
+                calendar_modal: true
+                compact_view: false
+                default_card: base
+                hide_buttons: false
+                mile_unit: false
+                moon_position: left
+                number_decimals: 2
+                selected_language: fr
+                show_background: true
+                southern_hemisphere: false
+                use_custom: false
+                use_default: true
+                use_entity: false
+                graph_config:
+                  graph_type: default
+                  y_ticks: false
+                  x_ticks: false
+                  show_time: true
+                  show_current: true
+                  show_highest: true
+                  y_ticks_position: left
+                  y_ticks_step_size: 30
+                  time_step_size: 30
+                font_customize:
+                  header_font_size: x-large
+                  header_font_style: capitalize
+                  header_font_color: ""
+                  label_font_size: auto
+                  label_font_style: none
+                  label_font_color: ""
+                  hide_label: false
+                latitude: 46.5135598810236
+                longitude: -72.7324801683426
+                location:
+                  city: Shawinigan
+                  country: Canada
+                theme:
+                  selected_theme: default
+                custom_background: >-
+                  https://cdn.jsdelivr.net/gh/ngocjohn/lunar-phase-card@1.7.3/background/moon_bg_3.png
+                card_mod:
+                  style: |
+                    ha-card {
+                       box-shadow: 0 0 0 2px gray;
+                     }
+
+  - type: entity
+    show_name: true
+    show_state: false
+    show_icon: true
+    entity: sensor.defi_hilo_in_progress
+    icon: mdi:progress-alert
+    name: Défi en cour
+    color: red
+    visibility:
+      - condition: state
+        entity: sensor.defi_hilo_in_progress
+        state: "True"
+    show_entity_picture: true
+    display_type: minimal
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Défis Hilo
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: >-
+                      {% 
+                      set data =
+                      state_attr('sensor.defi_hilo','next_events')[0] 
+                      %}
+
+                      {% 
+                      set montant =
+                      states('sensor.defi_hilo_currentdefi_cash')
+                      %}
+
+                      {% if data is defined %}
+
+                         <h2><center></center></h2>  
+                         <ha-alert alert-type="info"><h3>
+                          Défis en cour
+                        </h3></ha-alert>      
+                        <br>
+
+                       <table width=100%>
+                          <tr>
+                            <th>Période</th>
+                            <th>Permis</th>
+                            <th>Utilisé</th>
+                            <th>Prévus</th>
+                            <th>Actuel</th>
+                          </tr>  
+                            <tr>
+                              <td align=center>{{ data.phases.preheat_start.timestamp() | timestamp_custom('%HH%M') }}-{{ data.phases.recovery_end.timestamp() | timestamp_custom('%HH%M') }}</td>
+                              <td align=center>{{ "%.1f"|format(data.allowed_kWh) }} kWh</td> 
+                              <td align=center>{{ "%.1f"|format(data.used_kWh) }} kWh</td>   
+                              <td align=center>{{ "%.2f"|format(max(0,data.allowed_kWh - data.used_kWh) * 0.55) }} $</td>
+                              <td align=center>{{ montant }} $</td>      
+                            </tr>
+                       </table>
+                       
+                      {% else %}
+
+                      Aucune donnée disponible
+
+                      {% endif %}
+                  - type: custom:apexcharts-card
+                    experimental:
+                      color_threshold: true
+                    graph_span: 24h
+                    show:
+                      last_updated: true
+                    header:
+                      standard_format: false
+                      show: true
+                      show_states: true
+                      colorize_states: true
+                      title: kWh permnis et utilisé
+                    span:
+                      start: day
+                    series:
+                      - entity: sensor.defi_hilo_allowed_kwh
+                        type: line
+                        group_by:
+                          func: last
+                          duration: 15m
+                        stroke_width: 5
+                      - entity: sensor.defi_hilo_used_kwh
+                        type: area
+                        group_by:
+                          func: last
+                          duration: 15m
+                        stroke_width: 5
+                        show:
+                          header_color_threshold: true
+                        color_threshold:
+                          - value: 0
+                            color: steelblue
+                          - value: 0.5
+                            color: midnightblue
+                          - value: 1
+                            color: orange
+                          - value: 1.5
+                            color: orangered
+                          - value: 2
+                            color: red
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+
+  - type: entity
+    entity: sensor.nombre_de_lumieres_allumees
+    icon: mdi:lightbulb
+    color: yellow
+    visibility:
+      - condition: state
+        entity: sensor.nombre_de_lumieres_allumees
+        state_not: "0"
+    name: Allumées
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Lumières allumées
+          content:
+            type: entities
+            entities:
+              - type: custom:auto-entities
+                card:
+                  type: entities
+                  card_mod:
+                    style: |
+                      ha-card {
+                        box-shadow: 0 0 0 2px gray;
+                      }
+                filter:
+                  include:
+                    - entity_id: light.*
+                      state: "on"
+                  exclude:
+                    - entity_id: light.*groupe*
+                    - entity_id: light.*
+                      attributes:
+                        is_hue_group: true
+                sort:
+                  method: friendly_name
+                  ignore_case: true
+
+  - type: entity
+    entity: sensor.nombre_de_mise_a_jour_total
+    icon: mdi:update
+    color: red
+    visibility:
+      - condition: state
+        entity: sensor.nombre_de_mise_a_jour_total
+        state_not: "0"
+    name: MAJ
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Mises à jours
+          content:
+            type: entities
+            entities:
+              - type: custom:auto-entities
+                filter:
+                  include:
+                    - entity_id: update.*
+                      state: "on"
+                  exclude:
+                    - entity_id: update.*
+                      state: "off"
+                card:
+                  type: custom:flex-table-card
+                  card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+                  sort_by: friendly_name+
+                  clickable: true
+                  columns:
+                    - data: entity_picture
+                      align: center
+                      name: icone
+                      modify: >-
+                        '<img src="' + x + '"style="height:
+                        30px;width:30px">'
+                    - data: friendly_name
+                      align: left
+                      name: " Nom"
+                      modify: |-
+                        x = x.replace('update', '');
+                        x;
+                    - data: installed_version
+                      name: Installé
+                      align: center
+                    - data: latest_version
+                      name: Dernière
+                      align: center
+                  css:
+                    tbody tr td:nth-child(3): "color: green; font-weight: bold;"
+                    tbody tr td:nth-child(4): "color: red; font-weight: bold;"
+                visibility:
+                  - condition: state
+                    entity: sensor.nombre_de_mise_a_jour_hacs
+                    state_not: "0"
+
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    icon: mdi:progress-alert
+    entity: sensor.defi_hilo_nb_defi_planifies
+    name: Défi prévu
+    color: red
+    visibility:
+      - condition: state
+        entity: sensor.defi_hilo_nb_defi_planifies
+        state_not: "0"
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Défis Hilo
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:stack-in-card
+                    mode: vertical
+                    title: ❄️⚡Défis Hilo à venir⚡❄️
+                    card_mod:
+                      style: |
+                        ha-card {
+                          {% if states('sensor.defi_hilo_count')|int > 0 %}
+                          animation: dropshadow-change 2s linear infinite
+                          {% endif %}
+                        }
+
+                        @keyframes dropshadow-change {
+                          0% { filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0)); }
+                          50% { filter: drop-shadow(0px 0px 8px cyan); }
+                          100% { filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0)); }
+                        }
+                    cards:
+                      - type: markdown
+                        visibility:
+                          - condition: numeric_state
+                            entity: sensor.defi_hilo_count
+                            below: 1
+                        content: |
+                          ### Aucun défi annoncé!
+                        card_mod:
+                          style: |
+                            ha-card {
+                              border-radius:0px;
+                              border-style: none;
+                            }
+                      - type: custom:decluttering-card
+                        template: defi_hilo_card
+                        variables:
+                          - id: 0
+                      - type: custom:decluttering-card
+                        template: defi_hilo_card
+                        variables:
+                          - id: 1
+                      - type: custom:decluttering-card
+                        template: defi_hilo_card
+                        variables:
+                          - id: 2
+                card_mod:
+                  style: |
+                    ha-card {
+                       box-shadow: 0 0 0 2px gray;
+                    }
+
+  - type: entity
+    show_name: true
+    show_state: false
+    show_icon: true
+    entity: sensor.shawinigan_resume
+    name: Alerte
+    icon: mdi:alert
+    color: red
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: sensor.shawinigan_avis
+            state_not: "0"
+          - condition: state
+            entity: sensor.shawinigan_terminaisons
+            state_not: "0"
+          - condition: state
+            entity: sensor.shawinigan_bulletins
+            state_not: "0"
+          - condition: state
+            entity: sensor.shawinigan_veilles
+            state_not: "0"
+          - condition: state
+            entity: sensor.shawinigan_alertes
+            state_not: "0"
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Avis en cour
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                cards:
+                - type: markdown
+                  content: |2
+                        {% if is_number(states('sensor.shawinigan_avis')) and states('sensor.shawinigan_avis') | int == 0 and 
+                              is_number(states('sensor.shawinigan_bulletins')) and states('sensor.shawinigan_bulletins') | int == 0 and 
+                              is_number(states('sensor.shawinigan_alertes')) and states('sensor.shawinigan_alertes') | int == 0 and 
+                              is_number(states('sensor.shawinigan_veilles')) and states('sensor.shawinigan_veilles') | int == 0 and 
+                              is_number(states('sensor.shawinigan_terminaisons')) and states('sensor.shawinigan_terminaisons') | int == 0  %}
+
+                                <ha-alert alert-type="info">Aucune alerte présentement</ha-alert>                                      
+                        {% else %}
+                            {% set x = [ 'sensor.shawinigan_avis', 'sensor.shawinigan_bulletins', 'sensor.shawinigan_alertes', 'sensor.shawinigan_veilles', 'sensor.shawinigan_terminaisons' ] %}
+
+                            {% for state in states.sensor if state.entity_id in x %}
+                              {% for attr in state.attributes %}
+                                {%- if attr.startswith('alert_') %}
+                                  {%- if attr.startswith('alert_time_') %}
+                                      {{ state_attr(state.entity_id, attr) }}</ha-alert>
+                                  {% else %}
+                                      {{'\n'}}<ha-alert alert-type="warning" title="{{ state_attr(state.entity_id,'friendly_name') }}">{{ state_attr(state.entity_id, attr) }}
+                                  {%- endif %}
+                                {%- endif %}
+                              {%- endfor %}
+                            {% endfor %}
+                        {% endif %}
+                card_mod:
+                  style: |
+                    ha-card {
+                       box-shadow: 0 0 0 2px gray;
+                    }
+
+  - type: entity
+    show_name: false
+    show_state: false
+    show_icon: true
+    entity: sensor.collecte_shawinigan_ordures_date
+    icon: mdi:compost
+    show_entity_picture: true
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: sensor.collecte_shawinigan_ordures_date
+            state: "0"
+          - condition: state
+            entity: sensor.collecte_shawinigan_ordures_date
+            state: "1"
+    tap_action:
+      action: none
+
+  - type: entity
+    show_name: false
+    show_state: false
+    show_icon: true
+    entity: sensor.collecte_shawinigan_matieres_recyclables_date
+    icon: mdi:compost
+    show_entity_picture: true
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: sensor.collecte_shawinigan_matieres_recyclables_date
+            state: "0"
+          - condition: state
+            entity: sensor.collecte_shawinigan_matieres_recyclables_date
+            state: "1"
+    tap_action:
+      action: none
+
+  - type: entity
+    show_name: false
+    show_state: false
+    show_icon: true
+    entity: sensor.collecte_shawinigan_matieres_compostables_date
+    icon: mdi:compost
+    show_entity_picture: true
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: sensor.collecte_shawinigan_matieres_compostables_date
+            state: "0"
+          - condition: state
+            entity: sensor.collecte_shawinigan_matieres_compostables_date
+            state: "1"
+    tap_action:
+      action: none
