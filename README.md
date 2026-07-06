@@ -32,6 +32,31 @@
 
 <img width="2752" height="1261" alt="image" src="https://github.com/user-attachments/assets/0da51e09-4647-4cc8-a0f2-b6a710074283" />
 
-<img width="2752" height="1261" alt="image" src="https://github.com/user-attachments/assets/f5453b91-45a6-4ea7-bee2-2117038ad6f7" />
+<img width="2752" height="1979" alt="image" src="https://github.com/user-attachments/assets/1b3d528e-68cc-49c9-b123-f821cee403aa" />
 
+## PopUp
+
+<img width="2497" height="1599" alt="image" src="https://github.com/user-attachments/assets/2601d865-852f-4b68-8f2f-ef7c5d6c8631" />
+
+<img width="2752" height="1535" alt="image" src="https://github.com/user-attachments/assets/a1c13f4b-d8c3-4d8d-914d-cfc94bd54e96" />
+
+<img width="2752" height="1560" alt="image" src="https://github.com/user-attachments/assets/2467a331-4181-473c-be70-bf8bcf5d4b69" />
+
+<img width="2752" height="1575" alt="image" src="https://github.com/user-attachments/assets/c076d430-232e-473f-8522-4e6e12547a9c" />
+
+<img width="2623" height="1638" alt="image" src="https://github.com/user-attachments/assets/b7ec504f-6d0c-4e0a-aef6-11c85192e0e3" />
+
+<img width="2752" height="1606" alt="image" src="https://github.com/user-attachments/assets/bbf03cd8-8c6a-45c9-a371-0f827eed4edd" />
+
+<img width="2737" height="1595" alt="image" src="https://github.com/user-attachments/assets/910754b7-e46a-4422-b348-56dff2ac99b0" />
+
+<img width="2752" height="1389" alt="image" src="https://github.com/user-attachments/assets/7ca4a0b6-896e-4999-b60d-06fbc60a4d47" />
+
+<img width="2752" height="1461" alt="image" src="https://github.com/user-attachments/assets/f16fad02-4ce7-43a3-bdaa-f30d2d8e6a65" />
+
+<img width="2752" height="1519" alt="image" src="https://github.com/user-attachments/assets/6f0af963-9f33-4c5d-bc57-cd4be8c42734" />
+
+<img width="2694" height="1456" alt="image" src="https://github.com/user-attachments/assets/e06d8de8-5908-43d9-874d-85864cdd728b" />
+
+<img width="2752" height="1546" alt="image" src="https://github.com/user-attachments/assets/e865f8a5-7574-497e-9d70-2d50c1f62057" />
 
