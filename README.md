@@ -52,6 +52,8 @@
 
 ## PopUp
 
+<img width="2752" height="1859" alt="image" src="https://github.com/user-attachments/assets/57429d7d-0fd1-4d67-809a-657c24f1c58c" />
+
 
 <img width="2497" height="1599" alt="image" src="https://github.com/user-attachments/assets/2601d865-852f-4b68-8f2f-ef7c5d6c8631" />
 
