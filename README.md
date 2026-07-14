@@ -79,7 +79,7 @@
 <img width="2752" height="1389" alt="image" src="https://github.com/user-attachments/assets/7ca4a0b6-896e-4999-b60d-06fbc60a4d47" />
 
 
-<img width="2369" height="1812" alt="image" src="https://github.com/user-attachments/assets/89446bbc-fb6b-4e6c-b132-5715eb72cf54" />
+<img width="2478" height="1761" alt="image" src="https://github.com/user-attachments/assets/4e008d0a-dc1f-4a7e-9858-c3fc58df11b3" />
 
 
 <img width="2752" height="1461" alt="image" src="https://github.com/user-attachments/assets/f16fad02-4ce7-43a3-bdaa-f30d2d8e6a65" />
