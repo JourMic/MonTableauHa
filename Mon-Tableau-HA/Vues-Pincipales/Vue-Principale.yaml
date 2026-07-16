@@ -9,7 +9,7 @@ sections:
   - type: grid
     cards:
       - type: heading
-        heading: "Météo "
+        heading: "Météo"
         icon: mdi:weather-partly-rainy
         entities:
           - show_state: true
@@ -42,6 +42,8 @@ sections:
             action: toggle-forecast
           hold_action:
             action: select-forecast-attribute
+        current:
+          temperature_precision: 0
         grid_options:
           columns: 12
           rows: auto
@@ -206,6 +208,7 @@ sections:
           columns: full
           rows: 0.3
 
+
       - type: custom:calendar-card-pro
         entities:
           - entity: calendar.agenda_de_michel
@@ -298,6 +301,7 @@ sections:
             div.time-location {
               display: contents;
             }
+
 
       - type: heading
         icon: mdi:cctv
