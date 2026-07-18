@@ -2,7 +2,7 @@
 
 ## Vues principales
 
-=<img width="2735" height="1962" alt="image" src="https://github.com/user-attachments/assets/cca58de6-c2a7-4181-984c-9d7c76542a16" />
+<img width="2717" height="1990" alt="image" src="https://github.com/user-attachments/assets/0c5d961e-ea89-425d-9830-7bb5590a38de" />
 
 
 <img width="2752" height="1979" alt="image" src="https://github.com/user-attachments/assets/2e5798ac-4537-4c5a-b0ed-54453e9f3df4" />
