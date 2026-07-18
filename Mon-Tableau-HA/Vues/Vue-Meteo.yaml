@@ -6,16 +6,247 @@ type: sections
 max_columns: 2
 cards: []
 sections:
+
+  - type: grid
+    column_span: 2
+    cards:
+    
+      - type: heading
+        heading: "Position du Soleil + UV"
+        icon: mdi:white-balance-sunny
+        grid_options:
+          columns: 24
+          rows: 0.4
+    
+      - type: custom:button-card
+        entity: sun.sun
+        update_timer: 10s
+        show_icon: false
+        show_name: true
+        show_label: true
+        show_state: false
+        show_entity_picture: true
+        tap_action:
+          action: more-info
+        hold_action:
+          action: more-info
+          entity: sensor.st_00032986_index_uv
+        entity_picture: |
+          [[[
+            return entity.state == "below_horizon"
+              ? "/local/weather/animated/night.svg"
+              : "/local/weather/animated/day.svg";
+          ]]]
+        name: |
+          [[[
+            const sunrise = new Date(states["sensor.sun_next_rising"].state);
+            const sunset = new Date(states["sensor.sun_next_setting"].state);
+
+            function heure(d){
+              return d.toLocaleTimeString("fr-FR",
+              {hour:"2-digit",minute:"2-digit"}).replace(":","h");
+            }
+
+            if (sunrise < sunset)
+              return `Soleil sous l'horizon | Prochain lever: ${heure(sunrise)}`;
+
+            return `Soleil au-dessus de l'horizon | Prochain coucher: ${heure(sunset)}`;
+          ]]]
+        label: |
+          [[[
+              const sunrise = new Date(states["sensor.sun_next_rising"].state);
+              const sunset = new Date(states["sensor.sun_next_setting"].state);
+
+              const next = sunrise < sunset ? sunrise : sunset;
+
+              let sec = Math.floor((next-new Date())/1000);
+
+              if(sec<=0)
+                return "Maintenant";
+
+              const d=Math.floor(sec/86400);
+              sec%=86400;
+              const h=Math.floor(sec/3600);
+              sec%=3600;
+              const m=Math.floor(sec/60);
+              const s=sec%60;
+
+              return `Dans ${d?d+"j ":""}${String(h).padStart(2,"0")}h${String(m).padStart(2,"0")}m${String(s).padStart(2,"0")}s`;
+          ]]]
+        custom_fields:
+          uv: |
+            [[[
+              if (entity.state == "below_horizon") return "";
+              return Math.round(Number(states["sensor.st_00032986_index_uv"].state));
+             ]]]
+          progress: |
+            [[[
+              const sunrise = new Date(states['sensor.sun_next_rising'].state);
+              const sunset = new Date(states['sensor.sun_next_setting'].state);
+              const now = new Date();
+
+              let start, end, icon, gradient;
+
+              if (sunrise < sunset) {
+                // Nuit
+                end = sunrise;
+                start = new Date(sunrise);
+                start.setDate(start.getDate()-1);
+
+                icon = "🌙";
+                gradient = "linear-gradient(90deg,#435CFF,#5C6BC0,#FFF59D)";
+              } else {
+                // Jour
+                start = new Date(sunset);
+                start.setDate(start.getDate()-1);
+                end = sunset;
+
+                icon = "☀️";
+                gradient = "linear-gradient(90deg,#FFE082,#FFB300,#F57C00)";
+              }
+
+              let pct = ((now - start) / (end - start)) * 100;
+              pct = Math.max(0, Math.min(100, pct));
+              
+              const iconPct = Math.max(2, Math.min(98, pct));
+
+              return `
+              <div style="
+                  position:relative;
+                  width:100%;
+                  height:8px;
+                  border-radius:999px;
+                  background:rgba(255,255,255,.18);
+                  overflow:visible;">
+
+                  <div style="
+                      width:${pct}%;
+                      height:100%;
+                      border-radius:999px;
+                      background:${gradient};">
+                  </div>
+
+                  <div style="
+                      position:absolute;
+                      left: calc(${iconPct}% - 10px);
+                      top:20%;
+                      transform:translateY(-55%);
+                      font-size:19px;
+                      transition:left 1s linear;">
+                      ${icon}
+                  </div>
+
+              </div>`;
+            ]]]   
+        styles:
+          card:
+            - height: 58px
+            - padding: 3px 0px
+            - border-radius: 12px
+            - overflow: visible
+            - overflow: hidden
+            - background: |
+                [[[
+                  return entity.state=="below_horizon"
+                  ? "linear-gradient(180deg,#40445a 0%, rgba(64,68,90,.15) 250%)"
+                  : "linear-gradient(180deg,#44739e 0%, rgba(68,115,158,.15) 250%)";
+                ]]]
+            - "--button-card-ripple-icon-hover-opacity": 0.3
+            - "--button-card-ripple-icon-pressed-opacity": 0.3
+            - "--button-card-ripple-color": |
+                [[[
+                  return entity.state=="below_horizon"
+                  ? "#f9e491"
+                  : "#ffe54d";
+                ]]]      
+          grid:
+            - grid-template-areas: |
+                "i n"
+                "i l "
+                "i progress"
+            - grid-template-columns: 54px 1fr
+            - grid-template-rows: min-content min-content 7px
+          img_cell:
+            - width: 54px
+            - height: 54px
+            - justify-content: center
+            - align-items: center
+          icon:
+            - width: 80px
+            - height: 80px
+          name:
+            - align-self: end
+            - justify-self: start
+            - font-size: 16px
+            - font-weight: 500
+            - color: white
+          label:
+            - justify-self: start
+            - align-self: start
+            - font-size: 15px
+            - font-weight: bold
+            - padding-bottom: 8px
+            - color: |
+                [[[
+                  return entity.state=="below_horizon"
+                  ? "#f9e491"
+                  : "#ffe54d";
+                ]]]
+          custom_fields:
+            progress:
+              - justify-self: stretch
+              - align-self: center
+              - overflow: visible
+              - width: calc(100% - 10px)
+              - padding-bottom: 12px
+              - filter: drop-shadow(0 1px 2px rgba(0,0,0,.35))
+            uv:
+              - position: absolute
+              - top: 3px
+              - left: 34px
+              - width: 16px
+              - height: 16px
+              - border-radius: 50%
+              - display: |
+                  [[[
+                     return entity.state == "below_horizon"
+                       ? "none"
+                       : "flex";
+                  ]]]
+              - justify-content: center
+              - align-items: center
+              - font-size: 11px
+              - font-weight: bold
+              - color: white
+              - z-index: 10
+              - box-shadow: 0 2px 5px rgba(0,0,0,.35)
+              - background-color: |
+                  [[[
+                    const uv = Number(states['sensor.st_00032986_index_uv'].state);
+
+                    if (uv >= 11) return "purple";
+                    if (uv >= 8) return "firebrick";
+                    if (uv >= 6) return "darkorange";
+                    if (uv >= 3) return "gold";
+                    return "forestgreen";
+                  ]]]
+        card_mod:
+          style: "ha-card {\n  box-shadow: var(--couleur_ombre_bleu) !important;\n}  \_\n"
+        grid_options:
+          columns: 24
+          rows: auto
+
   - type: grid
     column_span: 1
     cards:
+
       - type: heading
         heading_style: title
         icon: mdi:weather-partly-snowy-rainy
         heading: Prévisions
         grid_options:
           columns: full
-          rows: 0.5
+          rows: 0.4
 
       - type: custom:weather-forecast-card
         entity: weather.pirateweather
@@ -23,14 +254,7 @@ sections:
         show_forecast: true
         name: Shawinigan-Sud
         default_forecast: daily
-        temperature_entity: sensor.st_00032986_temperature
-        show_condition_effects:
-          - rain
-          - snow
-          - lightning
-          - moon
-          - sun
-          - sky
+        show_condition_effects: true
         current:
           show_attributes:
             - name: humidity
@@ -42,13 +266,16 @@ sections:
             - name: visibility
               entity: sensor.shawinigan_sud_sensors_visibility
           secondary_info_attribute: apparent_temperature
+          temperature_entity: sensor.st_00032986_temperature
+          temperature_precision: 1
         forecast:
           mode: chart
           extra_attribute: wind_direction
           scroll_to_selected: true
           use_color_thresholds: true
           daily_slots: 7
-        forecast_action: {}
+          show_attribute_selector: false
+          temperature_precision: 1
         card_mod:
           style: |
             ha-card {
@@ -56,7 +283,7 @@ sections:
             }
         grid_options:
           columns: 12
-          rows: full
+          rows: auto
 
   - type: grid
     cards:
@@ -66,7 +293,7 @@ sections:
         heading: Vent
         grid_options:
           columns: full
-          rows: 0.5
+          rows: 0.3
 
       - type: custom:windrose-card
         title: Direction du vent
@@ -139,7 +366,7 @@ sections:
           secondary_intercardinal_directions_text_size: 30
         grid_options:
           columns: 12
-          rows: full
+          rows: auto
         card_mod:
           style: |
             ha-card {
