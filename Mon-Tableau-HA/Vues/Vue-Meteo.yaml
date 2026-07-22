@@ -15,7 +15,14 @@ sections:
         heading: "Position du Soleil + UV"
         icon: mdi:white-balance-sunny
         grid_options:
-          columns: 24
+          columns: 12
+          rows: 0.4
+          
+      - type: heading
+        heading: "Température"
+        icon: mdi:thermometer
+        grid_options:
+          columns: 12
           rows: 0.4
     
       - type: custom:button-card
@@ -448,8 +455,8 @@ sections:
               name: |
                 [[[
                   const temp = Number(entity.state);
-                  if (temp < -15) return "Froid extrême";
-                  if (temp >= -15 && temp < 0) return "Très froid";
+                  if (temp < -25) return "Froid extrême";
+                  if (temp >= -25 && temp < 0) return "Très froid";
                   if (temp >= 0 && temp < 10) return "Froid";
                   if (temp >= 10 && temp < 15) return "Frais";
                   if (temp >= 15 && temp < 25) return "Confortable";
