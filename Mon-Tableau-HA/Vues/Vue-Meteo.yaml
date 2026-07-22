@@ -294,7 +294,7 @@ sections:
           name:
             card:
               type: custom:button-card
-              name: Netatmo Jardin Température
+              name: Température Tempest
               styles:
                 card:
                   - width: auto
