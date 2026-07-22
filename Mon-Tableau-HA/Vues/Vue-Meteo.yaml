@@ -294,7 +294,7 @@ sections:
           name:
             card:
               type: custom:button-card
-              name: Température Tempest
+              name: WeatherFlow Tempest
               styles:
                 card:
                   - width: auto
@@ -531,9 +531,12 @@ sections:
                       ]]]
         styles:
           card:
-            - background-color: rgba(42,45,54,1.0)
-            - aspect-ratio: 7/1
-            - cursor: default
+            - background-color: rgba(68,115,158, 0.9)
+            - height: 74px
+            - padding: 10px 0px
+            - border-radius: 12px
+            - overflow: visible
+            - overflow: hidden
           custom_fields:
             icon:
               - position: absolute
