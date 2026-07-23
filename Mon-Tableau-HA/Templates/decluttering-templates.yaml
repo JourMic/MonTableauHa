@@ -599,9 +599,11 @@ CO2:
                   ]]]
     styles:
       card:
-        - background-color: rgba(42,45,54,1.0)
-        - aspect-ratio: 7/1
-        - cursor: default
+        - height: 74px
+        - padding: 10px 0px
+        - border-radius: 12px
+        - overflow: visible
+        - overflow: hidden
       custom_fields:
         icon:
           - position: absolute
@@ -950,9 +952,11 @@ temp_int:
                   ]]]
     styles:
       card:
-        - background-color: rgba(42,45,54,1.0)
-        - aspect-ratio: 7/1
-        - cursor: default
+        - height: 74px
+        - padding: 10px 0px
+        - border-radius: 12px
+        - overflow: visible
+        - overflow: hidden
       custom_fields:
         icon:
           - position: absolute
