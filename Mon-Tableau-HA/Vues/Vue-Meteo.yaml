@@ -159,20 +159,6 @@ sections:
             - border-radius: 12px
             - overflow: visible
             - overflow: hidden
-            - background: |
-                [[[
-                  return entity.state=="below_horizon"
-                  ? "linear-gradient(180deg,#40445a 0%, rgba(64,68,90,.15) 250%)"
-                  : "linear-gradient(180deg,#44739e 0%, rgba(68,115,158,.15) 250%)";
-                ]]]
-            - "--button-card-ripple-icon-hover-opacity": 0.2
-            - "--button-card-ripple-icon-pressed-opacity": 0.3
-            - "--button-card-ripple-color": |
-                [[[
-                  return entity.state=="below_horizon"
-                  ? "#f9e491"
-                  : "#ffe54d";
-                ]]]      
           grid:
             - grid-template-areas: |
                 "i n"
@@ -578,7 +564,6 @@ sections:
                       ]]]
         styles:
           card:
-            - background-color: rgba(68,115,158, 0.9)
             - height: 74px
             - padding: 10px 0px
             - border-radius: 12px
@@ -661,7 +646,7 @@ sections:
           
       - type: heading
         heading_style: title
-        icon: mdi:eye
+        icon: mdi:weather-dust
         heading: Vent
         grid_options:
           columns: full
@@ -814,10 +799,11 @@ badges:
                         color: purple
                       - value: 301
                         color: brown
-                  - show_name: true
+                        
+                  - type: glance
+                    show_name: true
                     show_icon: true
                     show_state: true
-                    type: glance
                     entities:
                       - entity: sensor.mauricie_quebec_canada_pm2_5
                         icon: mdi:air-filter
