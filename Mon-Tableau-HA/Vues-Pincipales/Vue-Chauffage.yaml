@@ -20,7 +20,7 @@ sections:
       - type: custom:decluttering-card
         template: temp_int
         variables:
-          - temp_int_entity: "sensor.maison_de_michel_maison_temperature"
+          - temp_int_entity: "sensor.maison_temperature"
         grid_options:
           columns: 12
           rows: auto
