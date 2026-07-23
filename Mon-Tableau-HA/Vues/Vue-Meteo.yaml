@@ -8,7 +8,6 @@ cards: []
 sections:
 
   - type: grid
-    column_span: 2
     cards:
     
       - type: heading
@@ -16,14 +15,7 @@ sections:
         icon: mdi:white-balance-sunny
         grid_options:
           columns: 12
-          rows: 0.4
-          
-      - type: heading
-        heading: "Température"
-        icon: mdi:thermometer
-        grid_options:
-          columns: 12
-          rows: 0.4
+          rows: 0.5
     
       - type: custom:button-card
         entity: sun.sun
@@ -257,7 +249,62 @@ sections:
         grid_options:
           columns: 12
           rows: auto
+          
+      - type: heading
+        heading_style: title
+        icon: mdi:weather-partly-snowy-rainy
+        heading: Prévisions
+        grid_options:
+          columns: full
+          rows: 0.5
 
+      - type: custom:weather-forecast-card
+        entity: weather.pirateweather
+        show_current: true
+        show_forecast: true
+        name: Shawinigan-Sud
+        default_forecast: daily
+        show_condition_effects: true
+        current:
+          show_attributes:
+            - name: humidity
+              entity: sensor.st_00032986_humidite
+            - name: pressure
+              entity: sensor.st_00032986_pression_atmospherique
+            - name: uv_index
+              entity: sensor.st_00032986_index_uv
+            - name: visibility
+              entity: sensor.shawinigan_sud_sensors_visibility
+          secondary_info_attribute: apparent_temperature
+          temperature_entity: sensor.st_00032986_temperature
+          temperature_precision: 1
+        forecast:
+          mode: chart
+          extra_attribute: wind_direction
+          scroll_to_selected: true
+          use_color_thresholds: true
+          daily_slots: 7
+          show_attribute_selector: false
+          temperature_precision: 1
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+        grid_options:
+          columns: 12
+          rows: auto
+
+  - type: grid
+    cards:
+    
+      - type: heading
+        heading: "Température"
+        icon: mdi:thermometer
+        grid_options:
+          columns: 12
+          rows: 0.5
+          
       - type: custom:button-card
         entity: sensor.st_00032986_temperature
         show_state: false
@@ -610,66 +657,15 @@ sections:
           style: "ha-card {\n  box-shadow: var(--couleur_ombre_bleu) !important;\n}  \_\n"
         grid_options:
           columns: 12
-          rows: auto
-
-  - type: grid
-    column_span: 1
-    cards:
-
-      - type: heading
-        heading_style: title
-        icon: mdi:weather-partly-snowy-rainy
-        heading: Prévisions
-        grid_options:
-          columns: full
-          rows: 0.4
-
-      - type: custom:weather-forecast-card
-        entity: weather.pirateweather
-        show_current: true
-        show_forecast: true
-        name: Shawinigan-Sud
-        default_forecast: daily
-        show_condition_effects: true
-        current:
-          show_attributes:
-            - name: humidity
-              entity: sensor.st_00032986_humidite
-            - name: pressure
-              entity: sensor.st_00032986_pression_atmospherique
-            - name: uv_index
-              entity: sensor.st_00032986_index_uv
-            - name: visibility
-              entity: sensor.shawinigan_sud_sensors_visibility
-          secondary_info_attribute: apparent_temperature
-          temperature_entity: sensor.st_00032986_temperature
-          temperature_precision: 1
-        forecast:
-          mode: chart
-          extra_attribute: wind_direction
-          scroll_to_selected: true
-          use_color_thresholds: true
-          daily_slots: 7
-          show_attribute_selector: false
-          temperature_precision: 1
-        card_mod:
-          style: |
-            ha-card {
-              box-shadow: var(--couleur_ombre_bleu) !important;
-            }
-        grid_options:
-          columns: 12
-          rows: auto
-
-  - type: grid
-    cards:
+          rows: Auto
+          
       - type: heading
         heading_style: title
         icon: mdi:eye
         heading: Vent
         grid_options:
           columns: full
-          rows: 0.3
+          rows: 0.5
 
       - type: custom:windrose-card
         title: Direction du vent
