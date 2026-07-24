@@ -26,10 +26,77 @@ sections:
         show_state: false
         show_entity_picture: true
         tap_action:
-          action: more-info
+          action: fire-dom-event
+          browser_mod:
+            service: browser_mod.popup
+            data:
+              title: Soleil Lune
+              content:
+                type: entities
+                entities:
+                  - type: custom:horizon-card
+                    title: Horizon
+                    moon: true
+                    refresh_period: 60
+                    fields:
+                      sunrise: true
+                      sunset: true
+                      dawn: true
+                      noon: true
+                      dusk: true
+                      azimuth: true
+                      sun_azimuth: true
+                      moon_azimuth: true
+                      elevation: true
+                      sun_elevation: true
+                      moon_elevation: true
+                      moonrise: true
+                      moonset: true
+                      moon_phase: true
+                    southern_flip: false
+                    language: fr
+                    time_format: language
+                    number_format: language
+                    no_card: false
+                    debug_level: 0
+                    moon_phase_rotation: -10
+                    card_mod:
+                      style: |
+                        ha-card {
+                          box-shadow: 0 0 0 2px gray;
+                        }
+
         hold_action:
-          action: more-info
-          entity: sensor.st_00032986_index_uv
+          action: fire-dom-event
+          browser_mod:
+            service: browser_mod.popup
+            data:
+              title: UV
+              content:
+                type: entities
+                entities:
+                  - type: custom:mini-graph-card
+                    icon: mdi:sun-wireless
+                    name: Index UV
+                    hours_to_show: 120
+                    hour24: true
+                    show:
+                      extrema: true
+                      graph: bar
+                      name: true
+                      icon: true
+                      state: true
+                    entities:
+                      - entity: sensor.st_00032986_index_uv
+                    color_thresholds:
+                      - value: 0
+                        color: green
+                      - value: 3
+                        color: yellow
+                      - value: 6
+                        color: orange
+                      - value: 11
+                        color: red
         entity_picture: |
           [[[
             return entity.state == "below_horizon"
@@ -750,109 +817,6 @@ badges:
     tap_action:
       action: navigate
       navigation_path: /tableau-ha/Sous-Vue-Radar
-
-  - type: entity
-    show_name: false
-    show_state: true
-    show_icon: true
-    color: red
-    entity: sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
-    tap_action:
-      action: fire-dom-event
-      browser_mod:
-        service: browser_mod.popup
-        data:
-          title: IQA
-          content:
-            type: entities
-            entities:
-              - type: custom:vertical-stack-in-card
-                card_mod:
-                  style: |
-                    ha-card {
-                      box-shadow: 0 0 0 2px gray;
-                    }
-                cards:
-                  - type: custom:mini-graph-card
-                    icon: mdi:air-purifier
-                    name: IQA
-                    hours_to_show: 128
-                    hour24: true
-                    show:
-                      extrema: true
-                      graph: bar
-                      name: true
-                      icon: true
-                      state: true
-                    entities:
-                      - entity: sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
-                    color_thresholds:
-                      - value: 0
-                        color: green
-                      - value: 51
-                        color: yellow
-                      - value: 101
-                        color: orange
-                      - value: 151
-                        color: red
-                      - value: 201
-                        color: purple
-                      - value: 301
-                        color: brown
-                        
-                  - type: glance
-                    show_name: true
-                    show_icon: true
-                    show_state: true
-                    entities:
-                      - entity: sensor.mauricie_quebec_canada_pm2_5
-                        icon: mdi:air-filter
-                        name: PM 2.5
-                      - entity: sensor.mauricie_quebec_canada_ozone
-                        name: Ozone
-                        icon: mdi:chart-box-outline
-                      - entity: sensor.mauricie_quebec_canada_dominant_pollutant
-                        icon: mdi:arrow-up-bold-circle
-                        name: Dominant
-
-  - type: entity
-    show_name: false
-    show_state: true
-    show_icon: true
-    icon: mdi:sun-wireless
-    color: cyan
-    entity: sensor.st_00032986_index_uv
-    tap_action:
-      action: fire-dom-event
-      browser_mod:
-        service: browser_mod.popup
-        data:
-          title: UV
-          content:
-            type: entities
-            entities:
-              - type: custom:mini-graph-card
-                icon: mdi:sun-wireless
-                name: Index UV
-                hours_to_show: 120
-                hour24: true
-                show:
-                  extrema: true
-                  graph: bar
-                  name: true
-                  icon: true
-                  state: true
-                entities:
-                   - entity: sensor.st_00032986_index_uv
-                color_thresholds:
-                  - value: 0
-                    color: green
-                  - value: 3
-                    color: yellow
-                  - value: 6
-                    color: orange
-                  - value: 11
-                    color: red
  
   - type: entity
     show_name: false
