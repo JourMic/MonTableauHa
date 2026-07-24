@@ -863,6 +863,11 @@ sections:
                     const offsetPx = (barWidth * percent) / 100;
                     return `calc(100% - ${barRightPercent}% - ${barWidth}px + ${offsetPx}px - ${halfCursor}px)`;
                   ]]]
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
 
       - type: heading
         heading_style: title
