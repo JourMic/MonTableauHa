@@ -27,7 +27,7 @@ sections:
           action: more-info
         entity: weather.pirateweather
         name: Shawinigan-Sud
-        show_condition_effects: true
+        show_condition_effects: false
         temperature_entity: sensor.st_00032986_temperature
         forecast:
           mode: simple
@@ -427,103 +427,6 @@ badges:
                     max_level: "80"
                     border_colour: yellow
 
-  - type: entity
-    entity: sensor.soleil_lever
-    display_type: complete
-    name: Soleil
-    visibility:
-      - condition: state
-        entity: sun.sun
-        state: below_horizon
-    tap_action:
-      action: fire-dom-event
-      browser_mod:
-        service: browser_mod.popup
-        data:
-          title: Soleil Lune
-          content:
-            type: entities
-            entities:
-              - type: custom:horizon-card
-                title: Horizon
-                moon: true
-                refresh_period: 60
-                fields:
-                  sunrise: true
-                  sunset: true
-                  dawn: true
-                  noon: true
-                  dusk: true
-                  azimuth: true
-                  sun_azimuth: true
-                  moon_azimuth: true
-                  elevation: true
-                  sun_elevation: true
-                  moon_elevation: true
-                  moonrise: true
-                  moonset: true
-                  moon_phase: true
-                southern_flip: false
-                language: fr
-                time_format: language
-                number_format: language
-                no_card: false
-                debug_level: 0
-                moon_phase_rotation: -10
-                card_mod:
-                  style: |
-                    ha-card {
-                      box-shadow: 0 0 0 2px gray;
-                    }
-
-  - type: entity
-    entity: sensor.soleil_coucher
-    name: Soleil
-    display_type: complete
-    visibility:
-      - condition: state
-        entity: sun.sun
-        state: above_horizon
-    tap_action:
-      action: fire-dom-event
-      browser_mod:
-        service: browser_mod.popup
-        data:
-          title: Soleil Lune
-          content:
-            type: entities
-            entities:
-              - type: custom:horizon-card
-                title: Horizon
-                moon: true
-                refresh_period: 60
-                fields:
-                  sunrise: true
-                  sunset: true
-                  dawn: true
-                  noon: true
-                  dusk: true
-                  azimuth: true
-                  sun_azimuth: true
-                  moon_azimuth: true
-                  elevation: true
-                  sun_elevation: true
-                  moon_elevation: true
-                  moonrise: true
-                  moonset: true
-                  moon_phase: true
-                southern_flip: false
-                language: fr
-                time_format: language
-                number_format: language
-                no_card: false
-                debug_level: 0
-                moon_phase_rotation: -10
-                card_mod:
-                  style: |
-                    ha-card {
-                      box-shadow: 0 0 0 2px gray;
-                    }
   - type: custom:lunar-phase-badge
     location_source: default
     entity: sensor.moon_phase
