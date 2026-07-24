@@ -8,13 +8,13 @@ cards: []
 sections:
   - type: grid
     cards:
-    
+      
       - type: heading
         heading: Humidité
         icon: mdi:water-percent
         grid_options:
           columns: full
-          rows: 0.3
+          rows: 0.4
 
       - type: custom:button-card
         entity: sensor.maison_humidite
@@ -434,7 +434,7 @@ sections:
             entity: sensor.plant_sensor_8e01_temperature
         grid_options:
           columns: full
-          rows: 0.5
+          rows: 0.4
 
       - type: plant-status
         entity: plant.lis_de_la_paix
@@ -450,6 +450,419 @@ sections:
 
   - type: grid
     cards:
+    
+      - type: heading
+        heading: Indice de la qualité de l'air
+        icon: mdi:weather-dust
+        grid_options:
+          columns: full
+          rows: 0.4
+    
+      - type: custom:button-card
+        entity: sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
+        show_state: false
+        show_icon: false
+        show_name: false
+        tap_action:
+          action: fire-dom-event
+          browser_mod:
+            service: browser_mod.popup
+            data:
+              title: IQA
+              content:
+                type: entities
+                entities:
+                  - type: custom:vertical-stack-in-card
+                    card_mod:
+                      style: |
+                        ha-card {
+                          box-shadow: 0 0 0 2px gray;
+                        }
+                    cards:
+                      - type: custom:mini-graph-card
+                        icon: mdi:air-purifier
+                        name: IQA
+                        hours_to_show: 128
+                        hour24: true
+                        show:
+                          extrema: true
+                          graph: bar
+                          name: true
+                          icon: true
+                          state: true
+                        entities:
+                          - entity: >-
+                              sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
+                        color_thresholds:
+                          - value: 0
+                            color: green
+                          - value: 51
+                            color: yellow
+                          - value: 101
+                            color: orange
+                          - value: 151
+                            color: red
+                          - value: 201
+                            color: purple
+                          - value: 301
+                            color: brown
+                      - type: glance
+                        show_name: true
+                        show_icon: true
+                        show_state: true
+                        entities:
+                          - entity: sensor.mauricie_quebec_canada_pm2_5
+                            icon: mdi:air-filter
+                            name: PM 2.5
+                          - entity: sensor.mauricie_quebec_canada_ozone
+                            name: Ozone
+                            icon: mdi:chart-box-outline
+                          - entity: sensor.mauricie_quebec_canada_dominant_pollutant
+                            icon: mdi:arrow-up-bold-circle
+                            name: Dominant
+
+        double_tap_action: none
+        hold_action: none
+        custom_fields:
+          icon:
+            card:
+              type: custom:button-card
+              icon: mdi:weather-dust
+              styles:
+                card:
+                  - aspect-ratio: 1/1
+                  - width: "[[[ return window.innerWidth <= 600 ? '20px' : '25px' ]]]"
+                  - border: none
+                  - border-radius: 50%
+                  - background: none
+                icon:
+                  - width: "[[[ return window.innerWidth <= 600 ? '18px' : '20px' ]]]"
+                  - color: white
+          icon_border:
+            card:
+              type: custom:button-card
+              styles:
+                card:
+                  - aspect-ratio: 1/1
+                  - width: "[[[ return window.innerWidth <= 600 ? '23px' : '25px' ]]]"
+                  - border: 1px solid white
+                  - border-radius: 50%
+                  - background: none
+          name:
+            card:
+              type: custom:button-card
+              name: Indice de la qualité de l'air
+              styles:
+                card:
+                  - width: auto
+                  - padding: 0
+                  - border: none
+                  - border-radius: 0
+                  - background: none
+                name:
+                  - font-size: >-
+                      [[[ return window.innerWidth <= 600 ? '0.9rem' : '1.0rem'
+                      ]]]
+                  - align-self: start
+                  - justify-self: start
+                  - color: white
+                  - font-weight: 500
+          bar:
+            card:
+              type: custom:button-card
+              show_name: false
+              show_icon: false
+              show_state: false
+              styles:
+                card:
+                  - height: 6px
+                  - width: >
+                      [[[ return window.innerWidth <= 600 ? "220px" : "250px";
+                      ]]]
+                  - border-radius: 999px
+                  - border: 0
+                  - padding: 0
+                  - background: |-
+                      linear-gradient(to right,
+                        rgba(0,255,24,1.0) 0%,
+                        rgba(152,255,0,1.0) 10%,
+                        rgba(255,252,0,1.0) 30%,
+                        rgba(255,174,0,1.0) 40%,
+                        rgba(255,0,0,1.0) 100%)
+          cursor:
+            card:
+              type: custom:button-card
+              show_name: false
+              show_icon: false
+              show_state: false
+              styles:
+                card:
+                  - width: 12px
+                  - height: 25px
+                  - border-radius: 999px
+                  - border: 4px solid rgba(42,45,54,1.0)
+                  - background-color: |
+                      [[[ 
+                        const min = 0;
+                        const max = 400;
+                        const db = Number(entity.state);
+                        const safe = isNaN(db) ? min : db;
+                        const clamp = (v, mn, mx) => Math.max(mn, Math.min(mx, v));
+                        const percent = clamp(((safe - min) / (max - min)) * 100, 0, 100);
+                        const stops = [
+                          { p: 0,   c: [0, 255, 24] },
+                          { p: 10,  c: [152, 255, 0] },
+                          { p: 30,  c: [255, 252, 0] },
+                          { p: 40,  c: [255, 174, 0] },
+                          { p: 100, c: [255, 0, 0] }
+                        ];
+                        let i = 1;
+                        while (i < stops.length && percent > stops[i].p) i++;
+                        const a = stops[i - 1], b = stops[i];
+                        const t = (percent - a.p) / (b.p - a.p || 1);
+                        const lerp = (x, y, t) => Math.round(x + (y - x) * t);
+                        const r = lerp(a.c[0], b.c[0], t);
+                        const g = lerp(a.c[1], b.c[1], t);
+                        const bcol = lerp(a.c[2], b.c[2], t);
+                        return `rgba(${r},${g},${bcol},1.0)`;
+                      ]]]
+          value:
+            card:
+              type: custom:button-card
+              show_name: false
+              show_icon: false
+              show_state: true
+              state_display: |
+                [[[ 
+                  const v = Number(entity.state); 
+                  return isNaN(v) ? '—' : v.toFixed(0); 
+                ]]]
+              styles:
+                card:
+                  - width: auto
+                  - padding: 0
+                  - border: none
+                  - border-radius: 0
+                  - background: none
+                state:
+                  - color: white
+                  - font-size: >-
+                      [[[ return window.innerWidth <= 600 ? '1.7rem' : '1.8rem'
+                      ]]]
+                  - font-weight: 900
+          unit:
+            card:
+              type: custom:button-card
+              name: iqa
+              styles:
+                card:
+                  - width: auto
+                  - padding: 0
+                  - border: none
+                  - border-radius: 0
+                  - background: none
+                name:
+                  - font-size: >-
+                      [[[ return window.innerWidth <= 600 ? '1.0rem' : '1.3rem'
+                      ]]]
+                  - align-self: start
+                  - justify-self: start
+                  - color: rgba(167,176,205,1.0)
+                  - font-weight: 800
+          min_val:
+            card:
+              type: custom:button-card
+              name: "0"
+              styles:
+                card:
+                  - width: auto
+                  - padding: 0
+                  - border: none
+                  - border-radius: 0
+                  - background: none
+                name:
+                  - font-size: >-
+                      [[[ return window.innerWidth <= 600 ? '0.8rem' : '1.0rem'
+                      ]]]
+                  - align-self: start
+                  - justify-self: start
+                  - color: rgba(167,176,205,1.0)
+                  - font-weight: 400
+          max_val:
+            card:
+              type: custom:button-card
+              name: "400"
+              styles:
+                card:
+                  - width: auto
+                  - padding: 0
+                  - border: none
+                  - border-radius: 0
+                  - background: none
+                name:
+                  - font-size: >-
+                      [[[ return window.innerWidth <= 600 ? '0.8rem' : '1.0rem'
+                      ]]]
+                  - align-self: start
+                  - justify-self: start
+                  - color: rgba(167,176,205,1.0)
+                  - font-weight: 400
+          comment:
+            card:
+              type: custom:button-card
+              show_name: true
+              show_icon: false
+              show_state: false
+              name: |
+                [[[ 
+                  const iqa = Number(entity.state);
+                  if (isNaN(iqa)) return "Indisponible";
+                  if (iqa < 51) return "Bon";
+                  if (iqa >= 51 && iqa < 101) return "Modéré";
+                  if (iqa >= 101 && iqa < 151) return "Mauvais Sensible";
+                  if (iqa >= 151 && iqa < 201) return "Mauvais";
+                  if (iqa >= 201 && iqa < 301) return "Très Mauvais";
+                  if (iqa >= 301) return "Dangereux";
+                  return "Indisponible";
+                ]]]
+              styles:
+                card:
+                  - height: 25px
+                  - width: auto
+                  - border-radius: 999px
+                  - border: none
+                  - padding: 0px 8px 0px 8px
+                  - background: white
+                  - background-color: |
+                      [[[ 
+                        const min = 0;
+                        const max = 400;
+                        const db = Number(entity.state);
+                        const clamp = (v, mn, mx) => Math.max(mn, Math.min(mx, v));
+                        const percent = isNaN(db) ? 0 : clamp(((db - min) / (max - min)) * 100, 0, 100);
+                        const stops = [
+                          { p: 0,   c: [0, 255, 24] },
+                          { p: 10,  c: [152, 255, 0] },
+                          { p: 30,  c: [255, 252, 0] },
+                          { p: 40,  c: [255, 174, 0] },
+                          { p: 100, c: [255, 0, 0] }
+                        ];
+                        let i = 1;
+                        while (i < stops.length && percent > stops[i].p) i++;
+                        const a = stops[i - 1], b = stops[i];
+                        const t = (percent - a.p) / (b.p - a.p || 1);
+                        const lerp = (x, y, t) => Math.round(x + (y - x) * t);
+                        const r = lerp(a.c[0], b.c[0], t);
+                        const g = lerp(a.c[1], b.c[1], t);
+                        const bcol = lerp(a.c[2], b.c[2], t);
+                        return `rgba(${r},${g},${bcol},0.5)`;
+                      ]]]
+                name:
+                  - font-size: >-
+                      [[[ return window.innerWidth <= 600 ? '0.8rem' : '0.9rem'
+                      ]]]
+                  - font-weight: 600
+                  - line-height: >
+                      [[[ return window.innerWidth <= 600 ? '0.9' : 'normal';
+                      ]]]
+                  - color: |
+                      [[[ 
+                        const min = 0;
+                        const max = 400;
+                        const db = Number(entity.state);
+                        const clamp = (v, mn, mx) => Math.max(mn, Math.min(mx, v));
+                        const percent = isNaN(db) ? 0 : clamp(((db - min) / (max - min)) * 100, 0, 100);
+                        const stops = [
+                          { p: 0,   c: [0, 255, 24] },
+                          { p: 10,  c: [152, 255, 0] },
+                          { p: 30,  c: [255, 252, 0] },
+                          { p: 40,  c: [255, 174, 0] },
+                          { p: 100, c: [255, 0, 0] }
+                        ];
+                        let i = 1;
+                        while (i < stops.length && percent > stops[i].p) i++;
+                        const a = stops[i - 1], b = stops[i];
+                        const t = (percent - a.p) / (b.p - a.p || 1);
+                        const lerp = (x, y, t) => Math.round(x + (y - x) * t);
+                        const r = lerp(a.c[0], b.c[0], t);
+                        const g = lerp(a.c[1], b.c[1], t);
+                        const bcol = lerp(a.c[2], b.c[2], t);
+                        return `rgba(${r},${g},${bcol},1.0)`;
+                      ]]]
+        styles:
+          card:
+            - height: 74px
+            - padding: 10px 0px
+            - border-radius: 12px
+            - overflow: visible
+            - overflow: hidden
+          custom_fields:
+            icon:
+              - position: absolute
+              - top: 55%
+              - left: 4%
+              - transform: translate(-50%, -50%)
+            icon_border:
+              - position: absolute
+              - top: "[[[ return window.innerWidth <= 600 ? '56%' : '55%' ]]]"
+              - left: 4%
+              - transform: translate(-50%, -50%)
+            name:
+              - position: absolute
+              - top: "[[[ return window.innerWidth <= 600 ? '1%' : '3%' ]]]"
+              - left: 8%
+            value:
+              - position: absolute
+              - top: "[[[ return window.innerWidth <= 600 ? '2%' : '1%' ]]]"
+              - right: "[[[ return window.innerWidth <= 600 ? '8%' : '10%' ]]]"
+            unit:
+              - position: absolute
+              - right: "[[[ return window.innerWidth <= 600 ? '3%' : '2%' ]]]"
+              - top: "[[[ return window.innerWidth <= 600 ? '2%' : '1%' ]]]"
+            min_val:
+              - position: absolute
+              - bottom: 2%
+              - left: "[[[ return window.innerWidth <= 600 ? '34%' : '38%' ]]]"
+            max_val:
+              - position: absolute
+              - bottom: 2%
+              - right: "[[[ return window.innerWidth <= 600 ? '2%' : '4%' ]]]"
+            comment:
+              - position: absolute
+              - top: 55%
+              - left: |
+                  [[[ 
+                    const iconLeftPercent = 1;
+                    const iconDiameterPx = window.innerWidth <= 600 ? 20 : 25;
+                    const barWidthPx = window.innerWidth <= 600 ? 220 : 250;
+                    const barRightPercent = window.innerWidth <= 600 ? 4 : 7;
+                    const iconRightExpr = `calc(${iconLeftPercent}% + ${iconDiameterPx}px)`;
+                    const barLeftExpr = `calc(100% - ${barRightPercent}% - ${barWidthPx}px)`;
+                    return `calc( ( ${iconRightExpr} + ${barLeftExpr} ) / 2 )`;
+                  ]]]
+              - transform: translate(-50%, -50%)
+            bar:
+              - position: absolute
+              - right: "[[[ return window.innerWidth <= 600 ? '4%' : '7%' ]]]"
+              - top: 55%
+              - transform: translateY(-50%)
+            cursor:
+              - position: absolute
+              - top: "[[[ return 'calc(55% - 12.5px)'; ]]]"
+              - left: |
+                  [[[ 
+                    const min = 0;
+                    const max = 400;
+                    const value = Number(entity.state);
+                    const clamp = (v, mn, mx) => Math.max(mn, Math.min(mx, v));
+                    const t = clamp(isNaN(value) ? min : value, min, max);
+                    const barWidth = window.innerWidth <= 600 ? 220 : 250;
+                    const halfCursor = 8;
+                    const barRightPercent = window.innerWidth <= 600 ? 4 : 7;
+                    const percent = ((t - min) / (max - min)) * 100;
+                    const offsetPx = (barWidth * percent) / 100;
+                    return `calc(100% - ${barRightPercent}% - ${barWidth}px + ${offsetPx}px - ${halfCursor}px)`;
+                  ]]]
 
       - type: heading
         heading_style: title
@@ -460,7 +873,7 @@ sections:
             entity: sensor.maison_bruit
         grid_options:
           columns: full
-          rows: 0.3
+          rows: 0.4
           
       - type: custom:button-card
         entity: sensor.maison_bruit
@@ -818,7 +1231,7 @@ sections:
       - type: history-graph
         grid_options:
           columns: full
-          rows: auto
+          rows: 2.5
         entities:
           - sensor.maison_bruit
         hours_to_show: 24
@@ -840,7 +1253,7 @@ sections:
             entity: sensor.canon_pro_100_series
         grid_options:
           columns: full
-          rows: 0.3
+          rows: 0.4
           
       - type: custom:auto-entities
         card:
