@@ -51,7 +51,7 @@ sections:
       - type: custom:decluttering-card
         template: tuiles_3
         variables:
-          - tuile3_entity: "light.brilliant_1g_8d1c0112b0_huche_du_salon"
+          - tuile3_entity: "switch.huche_salon"
           - tuile3_name: "Huche"
           - tuile3_icon: "hue:bulb-group-recessed-ceiling"
         grid_options:
@@ -87,7 +87,7 @@ sections:
       - type: custom:decluttering-card
         template: tuiles_3
         variables:
-          - tuile3_entity: "light.brilliant_3g_787ddeb5e2_table"
+          - tuile3_entity: "light.salle_a_diner_table"
           - tuile3_name: "Table"
           - tuile3_icon: "hue:ensis"
         grid_options:
@@ -97,7 +97,7 @@ sections:
       - type: custom:decluttering-card
         template: tuiles_3
         variables:
-          - tuile3_entity: "light.brilliant_3g_787ddeb5e2_vestibule_avant"
+          - tuile3_entity: "switch.vestibule_avant"
           - tuile3_name: "Vestibule"
           - tuile3_icon: "hue:ceiling-fugato-three-alt"
         grid_options:
@@ -339,7 +339,7 @@ sections:
       - type: custom:decluttering-card
         template: tuiles_3
         variables:
-          - tuile3_entity: "light.brilliant_1g_e8f9c29b43_chambre_maitres_light"
+          - tuile3_entity: "switch.plafond_chambre_des_maitres"
           - tuile3_name: "Plafond"
           - tuile3_icon: "hue:pendant-cher"
         grid_options:
@@ -435,9 +435,21 @@ sections:
       - type: heading
         heading_style: title
         grid_options:
-          columns: full
+          columns: 6
           rows: 0.8
         heading: Prises
+        card_mod:
+          style: |
+            .content.title {
+              font-size: 25px;
+            }
+            
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.8
+        heading: Interrupteur
         card_mod:
           style: |
             .content.title {
@@ -448,13 +460,20 @@ sections:
         icon: ""
         heading_style: title
         grid_options:
-          columns: 12
+          columns: 6
           rows: 0.4
         heading: Sous-Sol
         entities:
           - show_state: true
             show_icon: true
             entity: sensor.chauffe_eau_temperature
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Galerie Avant
 
       - type: custom:decluttering-card
         template: tuiles_3
@@ -472,6 +491,15 @@ sections:
           - tuile3_entity: "switch.chauffe_eau"
           - tuile3_name: "Ch eau"
           - tuile3_icon: "mdi:water-boiler"
+        grid_options:
+          columns: 3
+          rows: auto
+          
+      - type: custom:decluttering-card
+        template: tuiles_3
+        variables:
+          - tuile3_entity: "switch.lumieres_galerie_avant"
+          - tuile3_name: "Galerie Avant"
         grid_options:
           columns: 3
           rows: auto
