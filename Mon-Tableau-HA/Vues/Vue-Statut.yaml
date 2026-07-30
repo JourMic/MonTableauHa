@@ -405,8 +405,10 @@ sections:
         entities:
           - entity: sensor.speedtest_download
             name: Téléchargement
+            color: red
           - entity: sensor.speedtest_upload
             name: Téléversement
+            color: green
         days_to_show: 1
         period: hour
         chart_type: line
@@ -456,7 +458,7 @@ sections:
         icon: mdi:weather-dust
         grid_options:
           columns: full
-          rows: 0.4
+          rows: 0.3
     
       - type: custom:button-card
         entity: sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
@@ -878,7 +880,7 @@ sections:
             entity: sensor.maison_bruit
         grid_options:
           columns: full
-          rows: 0.4
+          rows: 0.3
           
       - type: custom:button-card
         entity: sensor.maison_bruit
@@ -1238,7 +1240,8 @@ sections:
           columns: full
           rows: 2.5
         entities:
-          - sensor.maison_bruit
+          - entity: sensor.maison_bruit
+            color: accent
         hours_to_show: 24
         show_names: false
         min_y_axis: 30
@@ -1258,7 +1261,7 @@ sections:
             entity: sensor.canon_pro_100_series
         grid_options:
           columns: full
-          rows: 0.4
+          rows: 0.3
           
       - type: custom:auto-entities
         card:
