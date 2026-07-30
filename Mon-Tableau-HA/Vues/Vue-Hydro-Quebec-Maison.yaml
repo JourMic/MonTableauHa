@@ -8,6 +8,7 @@ cards: []
 sections:
   - type: grid
     cards:
+
       - type: heading
         icon: mdi:open-in-app
         heading_style: title
@@ -61,51 +62,9 @@ sections:
           rows: auto
 
       - type: heading
-        heading: Coût actuellement et prévisions
-        heading_style: title
-        icon: mdi:currency-usd
-        badges:
-          - type: entity
-            show_state: true
-            show_icon: false
-            entity: sensor.hydro_quebec_maison_current_billing_period_total_to_date
-            state_content: state
-          - type: entity
-            show_state: true
-            show_icon: false
-            entity: sensor.hydro_quebec_maison_current_billing_period_projected_bill
-        grid_options:
-          columns: full
-          rows: 1
-
-      - type: statistics-graph
-        grid_options:
-          columns: 12
-          rows: 5
-        entities:
-          - entity: sensor.hydro_quebec_maison_current_billing_period_projected_bill
-            name: Prévisions
-            color: red
-          - entity: sensor.hydro_quebec_maison_current_billing_period_total_to_date
-            name: Actuellement
-            color: green
-        days_to_show: 30
-        period: week
-        chart_type: line
-        stat_types:
-          - state
-        card_mod:
-          style: |
-            ha-card {
-              box-shadow: var(--couleur_ombre_bleu) !important;
-            }
-
-  - type: grid
-    cards:
-      - type: heading
         icon: mdi:open-in-app
         heading_style: title
-        heading: Moyennes par jour pour la période
+        heading: Données pour la période
         grid_options:
           columns: full
           rows: 0.5
@@ -113,20 +72,20 @@ sections:
       - type: custom:decluttering-card
         template: tuiles_3
         variables:
-          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_current_day"
-          - tuile3_name: "Nb Jour"
+          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_duration"
+          - tuile3_name: "Jours Période"
           - tuile3_icon: "mdi:calendar-month"
           - tuile3_color: "red"
         grid_options:
           columns: 3
           rows: auto
-
+          
       - type: custom:decluttering-card
         template: tuiles_3
         variables:
-          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_average_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer-alert"
+          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_current_day"
+          - tuile3_name: "Jours"
+          - tuile3_icon: "mdi:calendar-month"
           - tuile3_color: "yellow"
         grid_options:
           columns: 3
@@ -155,12 +114,55 @@ sections:
           rows: auto
 
       - type: heading
+        heading: Coût actuellement et prévisions
+        heading_style: title
+        icon: mdi:currency-usd
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: sensor.hydro_quebec_maison_current_billing_period_total_to_date
+            state_content: state
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: sensor.hydro_quebec_maison_current_billing_period_projected_bill
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: statistics-graph
+        grid_options:
+          columns: 12
+          rows: 5
+        entities:
+          - entity: sensor.hydro_quebec_maison_current_billing_period_projected_bill
+            name: Prévisions
+            color: red
+          - entity: sensor.hydro_quebec_maison_current_billing_period_total_to_date
+            name: Actuellement
+            color: green
+        days_to_show: 30
+        period: week
+        chart_type: line
+        stat_types:
+          - state
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+
+  - type: grid
+    cards:
+
+      - type: heading
         heading_style: title
         heading: kWh actuellement
         icon: mdi:lightning-bolt-circle
         grid_options:
           columns: full
-          rows: 1
+          rows: 0.4
         badges:
           - type: entity
             show_state: true
@@ -190,7 +192,34 @@ sections:
             ha-card {
               box-shadow: var(--couleur_ombre_bleu) !important;
             }
+            
+      - type: heading
+        heading_style: title
+        heading: kWh 30 jours
+        icon: mdi:lightning-bolt-circle
+        grid_options:
+          columns: full
+          rows: 0.3
 
+      - type: statistics-graph
+        entities:
+         - entity: sensor.meter00_power
+           name: Compteur Hydro
+           color: accent
+        days_to_show: 30
+        period: day
+        chart_type: line
+        stat_types:
+           - max
+           - mean
+           - min
+        hide_legend: true
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu) !important;
+            }
+    
 badges:
   - type: entity
     entity: sensor.meter00_power
@@ -429,9 +458,6 @@ badges:
     tap_action:
       action: navigate
       navigation_path: /tableau-ha/Sous-vue-hydro-quebec
-
-
-
 
 
 
