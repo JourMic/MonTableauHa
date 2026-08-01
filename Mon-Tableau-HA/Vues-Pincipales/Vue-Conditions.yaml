@@ -61,41 +61,41 @@ sections:
         heading: Cuisine
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.maison_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.maison_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.maison_humidite"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.maison_humidite"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.sensibo_temperature_courante_cuisine"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.sensibo_temperature_courante_cuisine"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.sensibo_humiditee_courante_cuisine"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.sensibo_humiditee_courante_cuisine"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
@@ -125,41 +125,41 @@ sections:
             entity: sensor.govee_salle_deau_battery
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_salle_a_manger_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.govee_salle_a_manger_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_salle_a_manger_humidity"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.govee_salle_a_manger_humidity"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_salle_deau_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.govee_salle_deau_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_salle_deau_humidity"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.govee_salle_deau_humidity"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
@@ -189,41 +189,41 @@ sections:
           rows: 0.6
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.maison_chambre_des_maitres_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.maison_chambre_des_maitres_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.maison_chambre_des_maitres_humidite"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.maison_chambre_des_maitres_humidite"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.maison_bureau_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.maison_bureau_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.maison_bureau_humidite"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.maison_bureau_humidite"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
@@ -287,41 +287,41 @@ sections:
             entity: sensor.boudoirte_batterie
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_salle_de_bain_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.govee_salle_de_bain_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_salle_de_bain_humidity"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.govee_salle_de_bain_humidity"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.sensibo_temperature_courante_salle_de_repos"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.sensibo_temperature_courante_salle_de_repos"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.sensibo_humiditee_courante_salle_de_repos"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.sensibo_humiditee_courante_salle_de_repos"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
@@ -351,41 +351,41 @@ sections:
             entity: sensor.govee_chambre_invites_battery
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.maison_sous_sol_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.maison_sous_sol_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.maison_sous_sol_humidite"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.maison_sous_sol_humidite"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_chambre_invites_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.govee_chambre_invites_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_chambre_invites_humidity"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.govee_chambre_invites_humidity"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
@@ -415,41 +415,41 @@ sections:
             entity: sensor.maison_thermopompe_batterie
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_atelier_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.govee_atelier_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_atelier_humidity"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.govee_atelier_humidity"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.maison_thermopompe_temperature"
-          - tuile3_name: "Température"
-          - tuile3_icon: "mdi:thermometer"
+          - tuile5_entity: "sensor.maison_thermopompe_temperature"
+          - tuile5_name: "Température"
+          - tuile5_icon: "mdi:thermometer"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.govee_chambre_invites_humidity"
-          - tuile3_name: "Humidité"
-          - tuile3_icon: "mdi:water-percent"
+          - tuile5_entity: "sensor.govee_chambre_invites_humidity"
+          - tuile5_name: "Humidité"
+          - tuile5_icon: "mdi:water-percent"
         grid_options:
           columns: 3
           rows: auto
