@@ -2,6 +2,7 @@
 tuiles_1:
   default:
     - tuile1_name: "Chauffage"
+    - tuile1_entity: ""
   card:
     type: tile
     features:
@@ -11,7 +12,6 @@ tuiles_1:
     state_content:
       - current_temperature
       - hvac_action
-    features_position: bottom
     vertical: false
     card_mod:
       style: |
@@ -20,6 +20,9 @@ tuiles_1:
         }
 
 tuiles_2:
+  default:
+    - tuile2_name: ""
+    - tuile2_entity: ""
   card:
     type: tile
     name: "[[tuile2_name]]"
@@ -41,21 +44,17 @@ tuiles_2:
 
 tuiles_3:
   default:
-    - tuile3_icon: ""
-    - tuile3_color: ""
     - tuile3_name: ""
+    - tuile3_entity: ""
   card:
     type: tile
     entity: "[[tuile3_entity]]"
     name: "[[tuile3_name]]"
-    icon: "[[tuile3_icon]]"
-    color: "[[tuile3_color]]"
     vertical: true
     tap_action:
       action: toggle
     icon_tap_action:
       action: more-info
-    features_position: bottom
     card_mod:
       style: |
         ha-card
@@ -64,6 +63,8 @@ tuiles_3:
           }
 
 tuiles_4:
+  default:
+    - tuile4_entity: ""
   card:
     type: tile
     entity: "[[tuile4_entity]]"
@@ -82,6 +83,30 @@ tuiles_4:
         ha-card {
           box-shadow: var(--couleur_ombre_bleu);
         }
+     
+tuiles_5:
+  default:
+    - tuile5_entity: ""
+    - tuile5_icon: ""
+    - tuile5_color: ""
+    - tuile5_name: ""
+  card:
+    type: tile
+    entity: "[[tuile5_entity]]"
+    name: "[[tuile5_name]]"
+    icon: "[[tuile5_icon]]"
+    color: "[[tuile5_color]]"
+    vertical: true
+    tap_action:
+      action: none
+    icon_tap_action:
+      action: none
+    card_mod:
+      style: |
+        ha-card
+          {
+            box-shadow: var(--couleur_ombre_bleu);
+          }
 
 life360_personnes:
   default:
