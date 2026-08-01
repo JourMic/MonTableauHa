@@ -81,19 +81,19 @@ sections:
           rows: 0.4
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "binary_sensor.camera_salon_mouvement"
-          - tuile3_name: "Salon"
+          - tuile5_entity: "binary_sensor.camera_salon_mouvement"
+          - tuile5_name: "Salon"
         grid_options:
           columns: 6
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "binary_sensor.camera_cuisine_mouvement"
-          - tuile3_name: "Cuisine"
+          - tuile5_entity: "binary_sensor.camera_cuisine_mouvement"
+          - tuile5_name: "Cuisine"
         grid_options:
           columns: 6
           rows: auto
@@ -115,19 +115,19 @@ sections:
         heading: Allée
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "binary_sensor.camera_sous_sol_mouvement"
-          - tuile3_name: "Sous-sol"
+          - tuile5_entity: "binary_sensor.camera_sous_sol_mouvement"
+          - tuile5_name: "Sous-sol"
         grid_options:
           columns: 6
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "binary_sensor.camera_allee_mouvement"
-          - tuile3_name: "Allée"
+          - tuile5_entity: "binary_sensor.camera_allee_mouvement"
+          - tuile5_name: "Allée"
         grid_options:
           columns: 6
           rows: auto
@@ -149,19 +149,19 @@ sections:
         heading: Arrière
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "binary_sensor.camera_avant_mouvement"
-          - tuile3_name: "Galerie avant"
+          - tuile5_entity: "binary_sensor.camera_avant_mouvement"
+          - tuile5_name: "Galerie avant"
         grid_options:
           columns: 6
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "binary_sensor.camera_arriere_mouvement"
-          - tuile3_name: "Galerie Arrière"
+          - tuile5_entity: "binary_sensor.camera_arriere_mouvement"
+          - tuile5_name: "Galerie Arrière"
         grid_options:
           columns: 6
           rows: auto
@@ -197,19 +197,19 @@ sections:
         heading: Porte
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "lock.porte_d_entree"
-          - tuile3_name: "Serrure"
+          - tuile5_entity: "lock.porte_d_entree"
+          - tuile5_name: "Serrure"
         grid_options:
           columns: 6
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "binary_sensor.porte_d_entree_porte"
-          - tuile3_name: "Porte"
+          - tuile5_entity: "binary_sensor.porte_d_entree_porte"
+          - tuile5_name: "Porte"
         grid_options:
           columns: 6
           rows: auto
@@ -243,19 +243,19 @@ sections:
         heading: Cuisine
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.neviweb130_sensor_fuites_salle_deau"
-          - tuile3_name: "Toilette"
+          - tuile5_entity: "sensor.neviweb130_sensor_fuites_salle_deau"
+          - tuile5_name: "Toilette"
         grid_options:
           columns: 6
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.neviweb130_sensor_fuites_lave_vaiselles"
-          - tuile3_name: "Lave-Vaiselles"
+          - tuile5_entity: "sensor.neviweb130_sensor_fuites_lave_vaiselles"
+          - tuile5_name: "Lave-Vaiselles"
         grid_options:
           columns: 6
           rows: auto
@@ -277,19 +277,19 @@ sections:
         heading: Boudoire
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.neviweb130_sensor_fuites_salle_de_bain"
-          - tuile3_name: "Toilette"
+          - tuile5_entity: "sensor.neviweb130_sensor_fuites_salle_de_bain"
+          - tuile5_name: "Toilette"
         grid_options:
           columns: 6
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.neviweb130_sensor_fuites_laveuse"
-          - tuile3_name: "Laveuse"
+          - tuile5_entity: "sensor.neviweb130_sensor_fuites_laveuse"
+          - tuile5_name: "Laveuse"
         grid_options:
           columns: 6
           rows: auto
@@ -303,10 +303,10 @@ sections:
         heading: Sous-Sol
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.neviweb130_sensor_fuites_reservoir_eau_chaude"
-          - tuile3_name: "Chauffe eau"
+          - tuile5_entity: "sensor.neviweb130_sensor_fuites_reservoir_eau_chaude"
+          - tuile5_name: "Chauffe eau"
         grid_options:
           columns: 6
           rows: auto
