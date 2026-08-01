@@ -18,45 +18,45 @@ sections:
           rows: 0.5
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_rate"
-          - tuile3_name: "Tarif"
-          - tuile3_icon: "mdi:playlist-check"
-          - tuile3_color: "red"
+          - tuile5_entity: "sensor.hydro_quebec_maison_current_billing_period_rate"
+          - tuile5_name: "Tarif"
+          - tuile5_icon: "mdi:playlist-check"
+          - tuile5_color: "red"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_rate_option"
-          - tuile3_name: "Option"
-          - tuile3_icon: "mdi:arrow-all"
-          - tuile3_color: "yellow"
+          - tuile5_entity: "sensor.hydro_quebec_maison_current_billing_period_rate_option"
+          - tuile5_name: "Option"
+          - tuile5_icon: "mdi:arrow-all"
+          - tuile5_color: "yellow"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "binary_sensor.hydro_quebec_maison_current_period_epp_enabled"
-          - tuile3_name: "Égaux"
-          - tuile3_icon: "mdi:code-equal"
-          - tuile3_color: "green"
+          - tuile5_entity: "binary_sensor.hydro_quebec_maison_current_period_epp_enabled"
+          - tuile5_name: "Égaux"
+          - tuile5_icon: "mdi:code-equal"
+          - tuile5_color: "green"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.hydro_quebec_maison_balance"
-          - tuile3_name: "Paiements"
-          - tuile3_icon: "mdi:code-equal"
-          - tuile3_color: "blue"
+          - tuile5_entity: "sensor.hydro_quebec_maison_balance"
+          - tuile5_name: "Paiements"
+          - tuile5_icon: "mdi:code-equal"
+          - tuile5_color: "blue"
         grid_options:
           columns: 3
           rows: auto
@@ -70,45 +70,45 @@ sections:
           rows: 0.5
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_duration"
-          - tuile3_name: "Jours Période"
-          - tuile3_icon: "mdi:calendar-month"
-          - tuile3_color: "red"
+          - tuile5_entity: "sensor.hydro_quebec_maison_current_billing_period_duration"
+          - tuile5_name: "Jours Période"
+          - tuile5_icon: "mdi:calendar-month"
+          - tuile5_color: "red"
         grid_options:
           columns: 3
           rows: auto
           
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_current_day"
-          - tuile3_name: "Jours"
-          - tuile3_icon: "mdi:calendar-month"
-          - tuile3_color: "yellow"
+          - tuile5_entity: "sensor.hydro_quebec_maison_current_billing_period_current_day"
+          - tuile5_name: "Jours"
+          - tuile5_icon: "mdi:calendar-month"
+          - tuile5_color: "yellow"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_daily_bill_mean"
-          - tuile3_name: "Paiements"
-          - tuile3_icon: "mdi:currency-usd"
-          - tuile3_color: "green"
+          - tuile5_entity: "sensor.hydro_quebec_maison_current_billing_period_daily_bill_mean"
+          - tuile5_name: "Paiements"
+          - tuile5_icon: "mdi:currency-usd"
+          - tuile5_color: "green"
         grid_options:
           columns: 3
           rows: auto
 
       - type: custom:decluttering-card
-        template: tuiles_3
+        template: tuiles_5
         variables:
-          - tuile3_entity: "sensor.hydro_quebec_maison_current_billing_period_daily_consumption_mean"
-          - tuile3_name: "kWhs"
-          - tuile3_icon: "mdi:lightning-bolt-circle"
-          - tuile3_color: "blue"
+          - tuile5_entity: "sensor.hydro_quebec_maison_current_billing_period_daily_consumption_mean"
+          - tuile5_name: "kWhs"
+          - tuile5_icon: "mdi:lightning-bolt-circle"
+          - tuile5_color: "blue"
         grid_options:
           columns: 3
           rows: auto
@@ -458,6 +458,9 @@ badges:
     tap_action:
       action: navigate
       navigation_path: /tableau-ha/Sous-vue-hydro-quebec
+
+
+
 
 
 
