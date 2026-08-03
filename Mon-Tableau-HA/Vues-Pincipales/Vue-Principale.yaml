@@ -142,7 +142,7 @@ sections:
       - type: custom:decluttering-card
         template: tuiles_3
         variables:
-          - tuile3_entity: "light.brilliant_1g_8d1c0112b0_huche_du_salon"
+          - tuile3_entity: "switch.huche_salon"
           - tuile3_name: "Huche"
           - tuile3_icon: "hue:bulb-group-recessed-ceiling"
         grid_options:
@@ -182,7 +182,7 @@ sections:
       - type: custom:decluttering-card
         template: tuiles_3
         variables:
-          - tuile3_entity: "light.brilliant_3g_787ddeb5e2_table"
+          - tuile3_entity: "light.salle_a_diner_table"
           - tuile3_name: "Table"
           - tuile3_icon: "hue:ensis"
         grid_options:
@@ -192,7 +192,7 @@ sections:
       - type: custom:decluttering-card
         template: tuiles_3
         variables:
-          - tuile3_entity: "light.brilliant_3g_787ddeb5e2_vestibule_avant"
+          - tuile3_entity: "switch.vestibule_avant"
           - tuile3_name: "Vestibule"
           - tuile3_icon: "hue:ceiling-fugato-three-alt"
         grid_options:
@@ -207,7 +207,6 @@ sections:
         grid_options:
           columns: full
           rows: 0.3
-
 
       - type: custom:calendar-card-pro
         entities:
@@ -412,21 +411,21 @@ badges:
                       box-shadow: 0 0 0 2px gray;
                     }
                 cards:
-                  - type: custom:rain-gauge-card
+                  - type: custom:pluviometer-card
                     entity: sensor.shawinigan_sud_sensors_precipitation_today
-                    hourly_rate_entity: sensor.st_00032986_intensite_des_precipitations
-                    name: Aujourd’hui
-                    language: fr
-                    max_level: "80"
-                    border_colour: Blue
-                  - type: custom:rain-gauge-card
-                    entity: >-
-                      sensor.shawinigan_sud_sensors_precipitation_yesterday
-                    name: Hier
-                    language: fr
-                    max_level: "80"
-                    border_colour: yellow
+                    name: Pluie Aujourd'hui
+                    max_level: 60
+                    show_history: true
+                    secondary_name: Taux
+                    battery_entity: sensor.st_00032986_batterie
+                    secondary_entity: sensor.st_00032986_intensite_des_precipitations
 
+                  - type: custom:pluviometer-card
+                    entity: sensor.shawinigan_sud_sensors_precipitation_yesterday
+                    name: Pluie Hier
+                    max_level: 60
+                    show_history: true
+ 
   - type: custom:lunar-phase-badge
     location_source: default
     entity: sensor.moon_phase
