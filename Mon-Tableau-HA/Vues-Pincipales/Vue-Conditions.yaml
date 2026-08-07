@@ -12,10 +12,10 @@ sections:
       - type: heading
         heading: Salon
         heading_style: title
-        icon: mdi:molecule-co2
+        icon: mdi:home-search
         grid_options:
           columns: 12
-          rows: 0.4
+          rows: 0.7
           
       - type: custom:netatmo-card
         module_type: indoor
@@ -35,20 +35,287 @@ sections:
             ha-card {
               box-shadow: var(--couleur_ombre_bleu);
             }
+            
+      - type: heading
+        heading: Bureau
+        heading_style: title
+        icon: mdi:home-search
+        grid_options:
+          columns: 6
+          rows: 0.3
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 768px)"
+          
+      - type: heading
+        heading: Sous-Sol
+        heading_style: title
+        icon: mdi:home-search
+        grid_options:
+          columns: 6
+          rows: 0.3
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 768px)"
+ 
+      - type: custom:netatmo-card
+        module_type: indoor_extra
+        entity: sensor.maison_bureau_temperature
+        name: Bureau
+        humidity_entity: sensor.maison_bureau_humidite
+        co2_entity: sensor.maison_bureau_dioxyde_de_carbone
+        trend_entity: sensor.maison_bureau_tendance_de_la_temperature
+        battery_entity: sensor.maison_bureau_batterie
+        connectivity_entity: binary_sensor.maison_bureau_connectivite
+        grid_options:
+          rows: 2.5
+          columns: 6
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu);
+            }
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 768px)"
+ 
+      - type: custom:netatmo-card
+        module_type: indoor_extra
+        entity: sensor.maison_sous_sol_temperature
+        name: Sous-Sol
+        humidity_entity: sensor.maison_sous_sol_humidite
+        co2_entity: sensor.maison_sous_sol_dioxyde_de_carbone
+        trend_entity: sensor.maison_sous_sol_tendance_de_la_temperature
+        battery_entity: sensor.maison_sous_sol_batterie
+        connectivity_entity: binary_sensor.maison_sous_sol_connectivite
+        grid_options:
+         rows: 2.5
+         columns: 6
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu);
+            }
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 768px)"
+            
+      - type: heading
+        heading: Chambre Des Maîtres
+        heading_style: title
+        icon: mdi:home-search
+        grid_options:
+          columns: 6
+          rows: 0.3
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 768px)"
+          
+      - type: heading
+        heading_style: title
+        icon: mdi:home-search
+        grid_options:
+          columns: 6
+          rows: 0.3
+        heading: Thermopompe
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 768px)"
+
+      - type: custom:netatmo-card
+        module_type: indoor_extra
+        entity: sensor.maison_chambre_des_maitres_temperature
+        name: Chambre Maîtres
+        humidity_entity: sensor.maison_chambre_des_maitres_humidite
+        co2_entity: sensor.maison_chambre_des_maitres_dioxyde_de_carbone
+        trend_entity: sensor.maison_chambre_des_maitres_tendance_de_la_temperature
+        battery_entity: sensor.maison_chambre_des_maitres_batterie
+        connectivity_entity: binary_sensor.maison_chambre_des_maitres_connectivite
+        grid_options:
+          rows: 2.5
+          columns: 6
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu);
+            }
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 768px)"
+ 
+      - type: custom:netatmo-card
+        module_type: outdoor
+        entity: sensor.maison_thermopompe_temperature
+        name: Thermopompe
+        color_temperature: true
+        temp_cold: 0
+        temp_hot: 28
+        humidity_entity: sensor.maison_thermopompe_humidite
+        trend_entity: sensor.maison_thermopompe_tendance_de_la_temperature
+        battery_entity: sensor.maison_thermopompe_batterie
+        connectivity_entity: binary_sensor.maison_thermopompe_connectivite
+        grid_options:
+          rows: 0.7
+          columns: 6
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu);
+            }
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 768px)"
+            
+# Début de l'afficahge pour le téléphone
+
+      - type: heading
+        heading: Bureau
+        heading_style: title
+        icon: mdi:home-search
+        grid_options:
+          columns: 12
+          rows: 0.3
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px) and (max-width: 767px)"
+          
+      - type: custom:netatmo-card
+        module_type: indoor_extra
+        entity: sensor.maison_bureau_temperature
+        name: Bureau
+        humidity_entity: sensor.maison_bureau_humidite
+        co2_entity: sensor.maison_bureau_dioxyde_de_carbone
+        trend_entity: sensor.maison_bureau_tendance_de_la_temperature
+        battery_entity: sensor.maison_bureau_batterie
+        connectivity_entity: binary_sensor.maison_bureau_connectivite
+        grid_options:
+          rows: auto
+          columns: 12
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu);
+            }
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px) and (max-width: 767px)"
+            
+      - type: heading
+        heading: Sous-Sol
+        heading_style: title
+        icon: mdi:home-search
+        grid_options:
+          columns: 12
+          rows: 0.3
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px) and (max-width: 767px)"
+ 
+      - type: custom:netatmo-card
+        module_type: indoor_extra
+        entity: sensor.maison_sous_sol_temperature
+        name: Sous-Sol
+        humidity_entity: sensor.maison_sous_sol_humidite
+        co2_entity: sensor.maison_sous_sol_dioxyde_de_carbone
+        trend_entity: sensor.maison_sous_sol_tendance_de_la_temperature
+        battery_entity: sensor.maison_sous_sol_batterie
+        connectivity_entity: binary_sensor.maison_sous_sol_connectivite
+        grid_options:
+         rows: auto
+         columns: 12
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu);
+            }
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px) and (max-width: 767px)"
+            
+      - type: heading
+        heading: Chambre Des Maîtres
+        heading_style: title
+        icon: mdi:home-search
+        grid_options:
+          columns: 12
+          rows: 0.3
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px) and (max-width: 767px)"
+          
+      - type: custom:netatmo-card
+        module_type: indoor_extra
+        entity: sensor.maison_chambre_des_maitres_temperature
+        name: Chambre Maîtres
+        humidity_entity: sensor.maison_chambre_des_maitres_humidite
+        co2_entity: sensor.maison_chambre_des_maitres_dioxyde_de_carbone
+        trend_entity: sensor.maison_chambre_des_maitres_tendance_de_la_temperature
+        battery_entity: sensor.maison_chambre_des_maitres_batterie
+        connectivity_entity: binary_sensor.maison_chambre_des_maitres_connectivite
+        grid_options:
+          rows: auto
+          columns: 12
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu);
+            }
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px) and (max-width: 767px)"
+ 
+      - type: heading
+        heading_style: title
+        icon: mdi:home-search
+        grid_options:
+          columns: 12
+          rows: 0.3
+        heading: Thermopompe
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px) and (max-width: 767px)"
+ 
+      - type: custom:netatmo-card
+        module_type: outdoor
+        entity: sensor.maison_thermopompe_temperature
+        name: Thermopompe
+        color_temperature: true
+        temp_cold: 0
+        temp_hot: 28
+        humidity_entity: sensor.maison_thermopompe_humidite
+        trend_entity: sensor.maison_thermopompe_tendance_de_la_temperature
+        battery_entity: sensor.maison_thermopompe_batterie
+        connectivity_entity: binary_sensor.maison_thermopompe_connectivite
+        grid_options:
+          rows: auto
+          columns: 12
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: var(--couleur_ombre_bleu);
+            }
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px) and (max-width: 767px)"
+
+# Fin de l'afficahge pour le téléphone
+
+  - type: grid
+    cards:
 
       - type: heading
         heading_style: title
         grid_options:
           columns: 6
-          rows: 1.4
+          rows: 0.7
         heading: Cuisine
-        
+
       - type: heading
         heading: Salle à manger
         heading_style: title
         grid_options:
           columns: 6
-          rows: 1.4
+          rows: 0.7
         badges:
           - type: entity
             show_state: true
@@ -99,7 +366,7 @@ sections:
         heading_style: title
         grid_options:
           columns: 6
-          rows: 1.4
+          rows: 0.7
         heading: Salle d’eau
         badges:
           - type: entity
@@ -111,7 +378,7 @@ sections:
         heading_style: title
         grid_options:
           columns: 6
-          rows: 1.4
+          rows: 0.7
         heading: Tempest
         badges:
           - type: entity
@@ -158,120 +425,12 @@ sections:
         grid_options:
           columns: 3
           rows: auto
-
-  - type: grid
-    cards:
-    
-      - type: heading
-        heading: Bureau
-        heading_style: title
-        icon: mdi:molecule-co2
-        grid_options:
-          columns: 6
-          rows: 0.4
-          
-      - type: heading
-        heading: Sous-Sol
-        heading_style: title
-        icon: mdi:molecule-co2
-        grid_options:
-          columns: 6
-          rows: 0.4
-
-      - type: custom:netatmo-card
-        module_type: indoor_extra
-        entity: sensor.maison_bureau_temperature
-        name: Bureau
-        humidity_entity: sensor.maison_bureau_humidite
-        co2_entity: sensor.maison_bureau_dioxyde_de_carbone
-        trend_entity: sensor.maison_bureau_tendance_de_la_temperature
-        battery_entity: sensor.maison_bureau_batterie
-        connectivity_entity: binary_sensor.maison_bureau_connectivite
-        grid_options:
-          rows: 2.5
-          columns: 6
-        card_mod:
-          style: |
-            ha-card {
-              box-shadow: var(--couleur_ombre_bleu);
-            }
-
-      - type: custom:netatmo-card
-        module_type: indoor_extra
-        entity: sensor.maison_sous_sol_temperature
-        name: Sous-Sol
-        humidity_entity: sensor.maison_sous_sol_humidite
-        co2_entity: sensor.maison_sous_sol_dioxyde_de_carbone
-        trend_entity: sensor.maison_sous_sol_tendance_de_la_temperature
-        battery_entity: sensor.maison_sous_sol_batterie
-        connectivity_entity: binary_sensor.maison_sous_sol_connectivite
-        grid_options:
-         rows: 2.5
-         columns: 6
-        card_mod:
-          style: |
-            ha-card {
-              box-shadow: var(--couleur_ombre_bleu);
-            }
-
-      - type: heading
-        heading: Chambre Des Maîtres
-        heading_style: title
-        icon: mdi:molecule-co2
-        grid_options:
-          columns: 6
-          rows: 0.4
           
       - type: heading
         heading_style: title
         grid_options:
           columns: 6
-          rows: 0.4
-        heading: Thermopompe
- 
-      - type: custom:netatmo-card
-        module_type: indoor_extra
-        entity: sensor.maison_chambre_des_maitres_temperature
-        name: Chambre Maîtres
-        humidity_entity: sensor.maison_chambre_des_maitres_humidite
-        co2_entity: sensor.maison_chambre_des_maitres_dioxyde_de_carbone
-        trend_entity: sensor.maison_chambre_des_maitres_tendance_de_la_temperature
-        battery_entity: sensor.maison_chambre_des_maitres_batterie
-        connectivity_entity: binary_sensor.maison_chambre_des_maitres_connectivite
-        grid_options:
-          rows: 2.5
-          columns: 6
-        card_mod:
-          style: |
-            ha-card {
-              box-shadow: var(--couleur_ombre_bleu);
-            }
-
-      - type: custom:netatmo-card
-        module_type: outdoor
-        entity: sensor.maison_thermopompe_temperature
-        name: Thermopompe
-        color_temperature: true
-        temp_cold: 0
-        temp_hot: 28
-        humidity_entity: sensor.maison_thermopompe_humidite
-        trend_entity: sensor.maison_thermopompe_tendance_de_la_temperature
-        battery_entity: sensor.maison_thermopompe_batterie
-        connectivity_entity: binary_sensor.maison_thermopompe_connectivite
-        grid_options:
-          rows: 2.5
-          columns: 6
-        card_mod:
-          style: |
-            ha-card {
-              box-shadow: var(--couleur_ombre_bleu);
-            }
-          
-      - type: heading
-        heading_style: title
-        grid_options:
-          columns: 6
-          rows: 0.4
+          rows: 0.7
         heading: Salle de bain
         badges:
           - type: entity
@@ -283,7 +442,7 @@ sections:
         heading_style: title
         grid_options:
           columns: 6
-          rows: 0.4
+          rows: 0.7
         heading: Salle de repos
         badges:
           - type: entity
@@ -335,7 +494,7 @@ sections:
         heading_style: title
         grid_options:
           columns: 6
-          rows: 0.4
+          rows: 0.7
         heading: Chambre des invités
         badges:
           - type: entity
@@ -347,7 +506,7 @@ sections:
         heading_style: title
         grid_options:
           columns: 6
-          rows: 0.4
+          rows: 0.7
         heading: Atelier
         badges:
           - type: entity
@@ -394,4 +553,5 @@ sections:
         grid_options:
           columns: 3
           rows: auto
-          
+ 
+
