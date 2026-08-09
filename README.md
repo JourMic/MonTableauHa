@@ -24,11 +24,9 @@
 
 <img width="2736" height="1973" alt="image" src="https://github.com/user-attachments/assets/ed55493e-cbe1-4c12-abc1-8766bb08876c" />
 
-<img width="2365" height="1643" alt="image" src="https://github.com/user-attachments/assets/b0f73e61-cc8e-4786-a520-9d93b3d923be" />
-
+<img width="2224" height="1654" alt="image" src="https://github.com/user-attachments/assets/ef87b82b-2222-45e1-91ed-3d7e405dc075" />
 
 ## Sous Vues
-
 
 <img width="2752" height="1985" alt="image" src="https://github.com/user-attachments/assets/d6c472f6-279d-435c-b2f4-7c53a44e633c" />
 
@@ -37,7 +35,6 @@
 <img width="2752" height="1261" alt="image" src="https://github.com/user-attachments/assets/0da51e09-4647-4cc8-a0f2-b6a710074283" />
 
 <img width="2752" height="1979" alt="image" src="https://github.com/user-attachments/assets/1b3d528e-68cc-49c9-b123-f821cee403aa" />
-
 
 ## PopUp
 
