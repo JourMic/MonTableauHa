@@ -831,15 +831,8 @@ badges:
         data:
           title: Nombre d'éclaire
           content:
-            type: entities
-            entities:
-              - type: custom:vertical-stack-in-card
-                card_mod:
-                  style: |
-                    ha-card {
-                      box-shadow: 0 0 0 2px gray;
-                    }
-                cards:
+            type: vertical-stack
+            cards:
                   - type: glance
                     show_name: true
                     show_icon: true
