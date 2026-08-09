@@ -1482,3 +1482,1454 @@ badges:
                     ha-card {
                       box-shadow: 0 0 0 2px gray;
                     }
+                    
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    color: ""
+    entity: binary_sensor.rpi_power_status
+    name: RPI
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Statut RPI 5 8go
+          content:
+            type: entities
+            entities:
+              - type: custom:vertical-stack-in-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: 0 0 0 2px gray;
+                    }
+                cards:
+                  - type: vertical-stack
+                    cards:
+                      - type: custom:button-card
+                        entity: sensor.arris_tg2472g_router_ip_externe
+                        show_name: false
+                        show_icon: false
+                        show_state: false
+                        tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        styles:
+                          card:
+                            - padding: 0
+                            - border-radius: 12px
+                            - overflow: hidden
+                            - background: >-
+                                var(--ha-card-background,
+                                var(--card-background-color))
+                            - box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14)
+                          grid:
+                            - grid-template-areas: '"hero" "content"'
+                            - grid-template-columns: 1fr
+                            - grid-template-rows: auto auto
+                        custom_fields:
+                          hero:
+                            card:
+                              type: custom:button-card
+                              entity: sensor.system_monitor_adresse_ipv4_end0
+                              name: Raspberry Pi 5 8Go
+                              icon: mdi:raspberry-pi
+                              show_name: true
+                              show_icon: true
+                              show_label: true
+                              label: |
+                                [[[
+                                  const ip = states['sensor.system_monitor_adresse_ipv4_docker0']?.state;
+                                  const temp = states['sensor.system_monitor_temperature_du_processeur'];
+                                  const value = temp?.state;
+                                  const unit = temp?.attributes?.unit_of_measurement || '°C';
+
+                                  return `
+                                    <span>Serveur Home Assistant</span>
+                                    <br>
+                                    <span style="font-size:14px">
+                                      ${ip && !['unknown','unavailable'].includes(ip) ? ip : 'IP indisponible'}
+                                      · CPU ${value ?? '—'} ${unit}
+                                    </span>
+                                  `;
+                                ]]]
+                              tap_action:
+                                action: more-info
+                              custom_fields:
+                                status: |
+                                  [[[
+                                    const power =
+                                      states['binary_sensor.rpi_power_status']?.state;
+                                    const backup =
+                                      states['event.backup_automatic_backup']
+                                        ?.attributes?.event_type;
+
+                                    const powerOk = power === 'off';
+                                    const backupOk = backup === 'completed';
+
+                                    const dot = (label, ok) => `
+                                      <span style="display:flex;align-items:center;gap:4px">
+                                        <span style="
+                                          width:7px;
+                                          height:7px;
+                                          border-radius:50%;
+                                          background:${ok ? '#55c878' : '#e66b6b'};
+                                          box-shadow:${ok ? '0 0 8px #55c878' : 'none'};
+                                        "></span>
+                                        ${label}
+                                      </span>
+                                    `;
+
+                                    return `
+                                      <div style="
+                                        display:flex;
+                                        gap:7px;
+                                        padding:4px 7px;
+                                        border-radius:999px;
+                                        background:rgba(0,0,0,.30);
+                                        backdrop-filter:blur(8px);
+                                        font-size:11px;
+                                        font-weight:700;
+                                      ">
+                                        ${dot('Alimentation', powerOk)}
+                                        ${dot('Backup', backupOk)}
+                                      </div>
+                                    `;
+                                  ]]]
+                                hint: >-
+                                  Appuyer pour ouvrir les détails du Raspberry
+                                  Pi
+                              styles:
+                                card:
+                                  - min-height: 98px
+                                  - padding: 10px
+                                  - border-radius: 0
+                                  - border: none
+                                  - box-shadow: none
+                                  - color: white
+                                  - background-image: >-
+                                      linear-gradient(115deg,
+                                      rgba(22,26,31,.55), rgba(68,115,158,.12)),
+                                      url('/local/images/RPI.png')
+                                  - background-size: cover
+                                  - background-position: center
+                                  - --button-card-ripple-hover-opacity: 0.2
+                                  - --button-card-ripple-pressed-opacity: 0.3
+                                  - --button-card-ripple-color: '#E30B5D'
+                                grid:
+                                  - grid-template-areas: '"n i status" "l l l" "hint hint hint"'
+                                  - grid-template-columns: max-content 36px 1fr
+                                  - grid-template-rows: auto auto auto
+                                  - column-gap: 5px
+                                  - row-gap: 1px
+                                icon:
+                                  - width: 30px
+                                  - color: '#E30B5D'
+                                  - justify-self: start
+                                  - align-self: center
+                                  - transform: translateY(-3px)
+                                name:
+                                  - justify-self: start
+                                  - align-self: center
+                                  - font-size: 22px
+                                  - font-weight: 800
+                                  - letter-spacing: -0.4px
+                                label:
+                                  - justify-self: start
+                                  - text-align: left
+                                  - font-size: 14px
+                                  - line-height: 1.3
+                                  - opacity: 1
+                                custom_fields:
+                                  status:
+                                    - align-self: start
+                                    - justify-self: end
+                                  hint:
+                                    - justify-self: start
+                                    - margin-top: 2px
+                                    - font-size: 11px
+                                    - opacity: 1
+                          content:
+                            card:
+                              type: custom:button-card
+                              show_name: false
+                              show_icon: false
+                              tap_action:
+                                action: none
+                              styles:
+                                card:
+                                  - padding: 6px
+                                  - border: none
+                                  - border-radius: 0
+                                  - box-shadow: none
+                                  - background: transparent
+                                grid:
+                                  - grid-template-areas: >-
+                                      "info_title" "info_grid" "resources_title"
+                                      "resources_grid" "network_title"
+                                      "network_grid" "power_title" "power_grid"
+                                      "backup_title" "backup_grid"
+                                  - grid-template-columns: 1fr
+                                  - grid-template-rows: repeat(10, auto)
+                                  - row-gap: 4px
+                              custom_fields:
+                                info_title:
+                                  card:
+                                    type: custom:button-card
+                                    name: Informations
+                                    icon: mdi:information-outline
+                                    show_icon: true
+                                    show_name: true
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 0 2px
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"i n"'
+                                        - grid-template-columns: 25px 1fr
+                                      icon:
+                                        - width: 18px
+                                        - color: '#44739e'
+                                      name:
+                                        - justify-self: start
+                                        - font-size: 15px
+                                        - font-weight: 800
+                                info_grid:
+                                  card:
+                                    type: custom:button-card
+                                    show_name: false
+                                    show_icon: false
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 0
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"network uptime"'
+                                        - grid-template-columns: repeat(2, minmax(0, 1fr))
+                                        - gap: 4px
+                                    custom_fields:
+                                      network:
+                                        card:
+                                          type: custom:button-card
+                                          entity: sensor.system_monitor_adresse_ipv4_end0
+                                          name: Adresses IP
+                                          icon: mdi:ip-network
+                                          tap_action:
+                                            action: more-info
+                                          custom_fields:
+                                            internal: |
+                                              [[[
+                                                const value = states['sensor.system_monitor_adresse_ipv4_end0']?.state;
+                                                return `<span style="opacity:.58">Interne</span><b>${value || 'Indisponible'}</b>`;
+                                              ]]]
+                                            external: |
+                                              [[[
+                                                const value =
+                                                  states['sensor.system_monitor_adresse_ipv4_docker0']?.state;
+                                                return `<span style="opacity:.58">Externe</span><b>${value || 'Indisponible'}</b>`;
+                                              ]]]
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(127,127,127,.14)
+                                              - box-shadow: none
+                                              - background: rgba(68,115,158,.075)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: '#44739e'
+                                            grid:
+                                              - grid-template-areas: >-
+                                                  "i n" "internal internal" "external
+                                                  external"
+                                              - grid-template-columns: 24px 1fr
+                                              - grid-template-rows: auto auto auto
+                                              - row-gap: 1px
+                                            icon:
+                                              - width: 20px
+                                              - color: '#44739e'
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 800
+                                            custom_fields:
+                                              internal:
+                                                - display: flex
+                                                - justify-content: space-between
+                                                - gap: 4px
+                                                - font-size: 13px
+                                              external:
+                                                - display: flex
+                                                - justify-content: space-between
+                                                - gap: 4px
+                                                - font-size: 13px
+                                      uptime:
+                                        card:
+                                          type: custom:button-card
+                                          entity: sensor.system_monitor_dernier_demarrage
+                                          name: En fonction depuis
+                                          icon: mdi:clock-start
+                                          tap_action:
+                                            action: more-info
+                                          custom_fields:
+                                            reboot: |
+                                              [[[
+                                                const raw =
+                                                  states['sensor.system_monitor_dernier_demarrage']
+                                                    ?.state;
+
+                                                const duration = (value) => {
+                                                  if (!value ||
+                                                      ['unknown','unavailable'].includes(value)) {
+                                                    return '—';
+                                                  }
+
+                                                  const started = new Date(value).getTime();
+                                                  if (Number.isNaN(started)) return value;
+
+                                                  const total =
+                                                    Math.max(0, Math.floor((Date.now() - started) / 1000));
+                                                  const days = Math.floor(total / 86400);
+                                                  const hours = Math.floor((total % 86400) / 3600);
+                                                  const minutes = Math.floor((total % 3600) / 60);
+
+                                                  return `${days ? `${days}j ` : ''}${hours}h ${String(minutes).padStart(2,'0')}m`;
+                                                };
+
+                                                return `<span style="opacity:.58">Redémarrage</span><b>${duration(raw)}</b>`;
+                                              ]]]
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(127,127,127,.14)
+                                              - box-shadow: none
+                                              - background: rgba(68,115,158,.075)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: '#44739e'
+                                            grid:
+                                              - grid-template-areas: '"i n" "reboot reboot"'
+                                              - grid-template-columns: 24px 1fr
+                                              - grid-template-rows: auto auto auto
+                                              - row-gap: 1px
+                                            icon:
+                                              - width: 20px
+                                              - color: '#44739e'
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 800
+                                            custom_fields:
+                                              reboot:
+                                                - display: flex
+                                                - justify-content: space-between
+                                                - gap: 4px
+                                                - font-size: 13px
+                                              restart:
+                                                - display: flex
+                                                - justify-content: space-between
+                                                - gap: 4px
+                                                - font-size: 13px
+                                resources_title:
+                                  card:
+                                    type: custom:button-card
+                                    name: Ressources
+                                    icon: mdi:gauge
+                                    show_icon: true
+                                    show_name: true
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 1px 2px 0
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"i n"'
+                                        - grid-template-columns: 25px 1fr
+                                      icon:
+                                        - width: 18px
+                                        - color: '#44739e'
+                                      name:
+                                        - justify-self: start
+                                        - font-size: 15px
+                                        - font-weight: 800
+                                resources_grid:
+                                  card:
+                                    type: custom:button-card
+                                    show_name: false
+                                    show_icon: false
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 0
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"cpu temp" "ram free" "disk disk"'
+                                        - grid-template-columns: repeat(2, minmax(0, 1fr))
+                                        - gap: 4px
+                                    custom_fields:
+                                      cpu:
+                                        card:
+                                          type: custom:button-card
+                                          entity: >-
+                                            sensor.system_monitor_utilisation_du_processeur
+                                          name: CPU
+                                          icon: phu:intel-cpu
+                                          tap_action:
+                                            action: more-info
+                                          custom_fields:
+                                            value: |
+                                              [[[
+                                                const sensor =
+                                                  states['sensor.system_monitor_utilisation_du_processeur'];
+                                                const value =
+                                                  Number.parseFloat(String(sensor?.state ?? '').replace(',', '.'));
+                                                const unit = sensor?.attributes?.unit_of_measurement || '%';
+                                                return Number.isFinite(value)
+                                                  ? `${Math.round(value)} ${unit}`
+                                                  : '—';
+                                              ]]]
+                                            bar: |
+                                              [[[
+                                                const raw =
+                                                  states['sensor.system_monitor_utilisation_du_processeur']?.state;
+                                                const value =
+                                                  Number.parseFloat(String(raw ?? '').replace(',', '.'));
+                                                const percent =
+                                                  Number.isFinite(value)
+                                                    ? Math.max(0, Math.min(100, value))
+                                                    : 0;
+                                                const color =
+                                                  percent >= 90 ? '230,107,107' : '68,115,158';
+
+                                                return `
+                                                  <div style="position:relative;width:100%;height:13px;border-radius:999px;overflow:hidden;background:rgba(127,127,127,.18)">
+                                                    <div style="width:${percent}%;height:100%;background:rgb(${color});transition:width .35s ease"></div>
+                                                    <div style="position:absolute;inset:1px 6px;display:flex;align-items:center;justify-content:flex-start;font-size:13px;font-weight:800">${Math.round(percent)} %</div>
+                                                  </div>
+                                                `;
+                                              ]]]
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(68,115,158,.20)
+                                              - box-shadow: none
+                                              - background: rgba(68,115,158,.055)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: rgb(68,115,158)
+                                            grid:
+                                              - grid-template-areas: '"i n value" "bar bar bar"'
+                                              - grid-template-columns: 22px 1fr auto
+                                              - grid-template-rows: auto 11px
+                                              - column-gap: 4px
+                                              - row-gap: 4px
+                                            icon:
+                                              - width: 24px
+                                              - color: '#44739e'
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            custom_fields:
+                                              value:
+                                                - justify-self: end
+                                                - align-self: center
+                                                - font-size: 14px
+                                                - font-weight: 700
+                                                - white-space: nowrap
+                                              bar:
+                                                - width: 100%
+                                      temp:
+                                        card:
+                                          type: custom:button-card
+                                          entity: >-
+                                            sensor.system_monitor_temperature_du_processeur
+                                          name: Temp.
+                                          icon: mdi:thermometer
+                                          tap_action:
+                                            action: more-info
+                                          custom_fields:
+                                            value: |
+                                              [[[
+                                                const sensor =
+                                                  states['sensor.system_monitor_temperature_du_processeur'];
+                                                const value =
+                                                  Number.parseFloat(String(sensor?.state ?? '').replace(',', '.'));
+                                                const unit = sensor?.attributes?.unit_of_measurement || '°C';
+                                                return Number.isFinite(value)
+                                                  ? `${Math.round(value)} ${unit}`
+                                                  : '—';
+                                              ]]]
+                                            bar: |
+                                              [[[
+                                                const raw =
+                                                  states['sensor.system_monitor_temperature_du_processeur']?.state;
+
+                                                const value =
+                                                  Number.parseFloat(String(raw ?? '').replace(',', '.'));
+
+                                                const maxTemperature = 80;
+                                                const warningTemperature = 60;
+
+                                                const percent =
+                                                  Number.isFinite(value)
+                                                    ? Math.max(0, Math.min(100, (value / maxTemperature) * 100))
+                                                    : 0;
+
+                                                const color =
+                                                  value >= warningTemperature
+                                                    ? '230,107,107'
+                                                    : '255,165,0';
+
+                                                const displayedValue =
+                                                  Number.isFinite(value)
+                                                    ? `${Math.round(value)} °C`
+                                                    : '— °C';
+
+                                                return `
+                                                  <div style="
+                                                    position:relative;
+                                                    width:100%;
+                                                    height:13px;
+                                                    border-radius:999px;
+                                                    overflow:hidden;
+                                                    background:rgba(127,127,127,.18);
+                                                  ">
+                                                    <div style="
+                                                      width:${percent}%;
+                                                      height:100%;
+                                                      background:rgb(${color});
+                                                      transition:width .35s ease, background .35s ease;
+                                                    "></div>
+
+                                                    <div style="
+                                                      position:absolute;
+                                                      inset:1px 6px;
+                                                      display:flex;
+                                                      align-items:center;
+                                                      justify-content:flex-start;
+                                                      font-size:13px;
+                                                      font-weight:800;
+                                                    ">
+                                                      ${displayedValue}
+                                                    </div>
+                                                  </div>
+                                                `;
+                                              ]]]
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(255,165,0,.20)
+                                              - box-shadow: none
+                                              - background: rgba(255,165,0,.055)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: rgb(255,165,0)
+                                            grid:
+                                              - grid-template-areas: '"i n value" "bar bar bar"'
+                                              - grid-template-columns: 22px 1fr auto
+                                              - grid-template-rows: auto 11px
+                                              - column-gap: 4px
+                                              - row-gap: 4px
+                                            icon:
+                                              - width: 24px
+                                              - color: rgb(255,165,0)
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            custom_fields:
+                                              value:
+                                                - justify-self: end
+                                                - align-self: center
+                                                - font-size: 14px
+                                                - font-weight: 700
+                                                - white-space: nowrap
+                                              bar:
+                                                - width: 100%
+                                      ram:
+                                        card:
+                                          type: custom:button-card
+                                          entity: >-
+                                            sensor.system_monitor_utilisation_de_la_memoire
+                                          name: RAM
+                                          icon: phu:ram-memory
+                                          tap_action:
+                                            action: more-info
+                                          custom_fields:
+                                            value: |
+                                              [[[
+                                                const sensor =
+                                                  states['sensor.system_monitor_utilisation_de_la_memoire'];
+                                                const value =
+                                                  Number.parseFloat(String(sensor?.state ?? '').replace(',', '.'));
+                                                const unit = sensor?.attributes?.unit_of_measurement || '%';
+                                                return Number.isFinite(value)
+                                                  ? `${Math.round(value)} ${unit}`
+                                                  : '—';
+                                              ]]]
+                                            bar: |
+                                              [[[
+                                                const raw =
+                                                  states['sensor.system_monitor_utilisation_de_la_memoire']?.state;
+                                                const value =
+                                                  Number.parseFloat(String(raw ?? '').replace(',', '.'));
+                                                const percent =
+                                                  Number.isFinite(value)
+                                                    ? Math.max(0, Math.min(100, value))
+                                                    : 0;
+                                                const color =
+                                                  percent >= 90 ? '230,107,107' : '255,0,0';
+
+                                                return `
+                                                  <div style="position:relative;width:100%;height:13px;border-radius:999px;overflow:hidden;background:rgba(127,127,127,.18)">
+                                                    <div style="width:${percent}%;height:100%;background:rgb(${color});transition:width .35s ease"></div>
+                                                    <div style="position:absolute;inset:1px 6px;display:flex;align-items:center;justify-content:flex-start;font-size:13px;font-weight:800">${Math.round(percent)} %</div>
+                                                  </div>
+                                                `;
+                                              ]]]
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(255,0,0,.40)
+                                              - box-shadow: none
+                                              - background: rgba(255,0,30,.2)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: rgb(255,0,0)
+                                            grid:
+                                              - grid-template-areas: '"i n value" "bar bar bar"'
+                                              - grid-template-columns: 22px 1fr auto
+                                              - grid-template-rows: auto 11px
+                                              - column-gap: 4px
+                                              - row-gap: 4px
+                                            icon:
+                                              - width: 24px
+                                              - color: rgb(255,0,0)
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            custom_fields:
+                                              value:
+                                                - justify-self: end
+                                                - align-self: center
+                                                - font-size: 14px
+                                                - font-weight: 700
+                                                - white-space: nowrap
+                                              bar:
+                                                - width: 100%
+                                      free:
+                                        card:
+                                          type: custom:button-card
+                                          entity: sensor.system_monitor_memoire_libre
+                                          name: RAM libre
+                                          icon: phu:ram-memory
+                                          tap_action:
+                                            action: more-info
+                                          custom_fields:
+                                            value: |
+                                              [[[
+                                                const sensor =
+                                                  states['sensor.system_monitor_memoire_libre'];
+                                                const value =
+                                                  Number.parseFloat(String(sensor?.state ?? '').replace(',', '.'));
+                                                const unit = sensor?.attributes?.unit_of_measurement || 'MiB';
+                                                return Number.isFinite(value)
+                                                  ? `${Math.round(value)} ${unit}`
+                                                  : '—';
+                                              ]]]
+                                            bar: |
+                                              [[[
+                                                const raw =
+                                                  states['sensor.system_monitor_memoire_libre']?.state;
+                                                const value =
+                                                  Number.parseFloat(String(raw ?? '').replace(',', '.'));
+                                                const percent =
+                                                  Number.isFinite(value)
+                                                    ? Math.max(0, Math.min(100, (value / 3800) * 100))
+                                                    : 0;
+
+                                                return `
+                                                  <div style="position:relative;width:100%;height:13px;border-radius:999px;overflow:hidden;background:rgba(127,127,127,.18)">
+                                                    <div style="width:${percent}%;height:100%;background:#1f6feb;transition:width .35s ease"></div>
+                                                    <div style="position:absolute;inset:1px 6px;display:flex;align-items:center;justify-content:flex-start;font-size:13px;font-weight:800">${Math.round(percent)} %</div>
+                                                  </div>
+                                                `;
+                                              ]]]
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(31,111,235,.20)
+                                              - box-shadow: none
+                                              - background: rgba(31,111,235,.055)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: '#1f6feb'
+                                            grid:
+                                              - grid-template-areas: '"i n value" "bar bar bar"'
+                                              - grid-template-columns: 22px 1fr auto
+                                              - grid-template-rows: auto 11px
+                                              - column-gap: 4px
+                                              - row-gap: 4px
+                                            icon:
+                                              - width: 24px
+                                              - color: '#1f6feb'
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            custom_fields:
+                                              value:
+                                                - justify-self: end
+                                                - align-self: center
+                                                - font-size: 14px
+                                                - font-weight: 700
+                                                - white-space: nowrap
+                                              bar:
+                                                - width: 100%
+                                      disk:
+                                        card:
+                                          type: custom:button-card
+                                          entity: >-
+                                            sensor.system_monitor_utilisation_du_disque
+                                          name: SSD
+                                          icon: phu:seagate-ssd
+                                          tap_action:
+                                            action: more-info
+                                          custom_fields:
+                                            value: |
+                                              [[[
+                                                const sensor =
+                                                  states['sensor.system_monitor_utilisation_du_disque'];
+                                                const value =
+                                                  Number.parseFloat(String(sensor?.state ?? '').replace(',', '.'));
+                                                const unit = sensor?.attributes?.unit_of_measurement || '%';
+                                                return Number.isFinite(value)
+                                                  ? `${value.toFixed(1)} ${unit}`
+                                                  : '—';
+                                              ]]]
+                                            bar: |
+                                              [[[
+                                                const raw =
+                                                  states['sensor.system_monitor_utilisation_du_disque']?.state;
+                                                const value =
+                                                  Number.parseFloat(String(raw ?? '').replace(',', '.'));
+                                                const percent =
+                                                  Number.isFinite(value)
+                                                    ? Math.max(0, Math.min(100, value))
+                                                    : 0;
+                                                const color =
+                                                  percent >= 75 ? '230,107,107' : '127,127,127';
+
+                                                return `
+                                                  <div style="position:relative;width:100%;height:13px;border-radius:999px;overflow:hidden;background:rgba(127,127,127,.18)">
+                                                    <div style="width:${percent}%;height:100%;background:rgb(${color});transition:width .35s ease"></div>
+                                                    <div style="position:absolute;inset:1px 6px;display:flex;align-items:center;justify-content:flex-start;font-size:13px;font-weight:800">${percent.toFixed(1)} %</div>
+                                                  </div>
+                                                `;
+                                              ]]]
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(127,127,127,.20)
+                                              - box-shadow: none
+                                              - background: rgba(127,127,127,.055)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: '#7d8a96'
+                                            grid:
+                                              - grid-template-areas: '"i n value" "bar bar bar"'
+                                              - grid-template-columns: 22px 1fr auto
+                                              - grid-template-rows: auto 11px
+                                              - column-gap: 4px
+                                              - row-gap: 4px
+                                            icon:
+                                              - width: 24px
+                                              - color: '#7d8a96'
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            custom_fields:
+                                              value:
+                                                - justify-self: end
+                                                - align-self: center
+                                                - font-size: 14px
+                                                - font-weight: 700
+                                                - white-space: nowrap
+                                              bar:
+                                                - width: 100%
+                                network_title:
+                                  card:
+                                    type: custom:button-card
+                                    name: Débits réseau
+                                    icon: mdi:swap-vertical-bold
+                                    show_icon: true
+                                    show_name: true
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 1px 2px 0
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"i n"'
+                                        - grid-template-columns: 25px 1fr
+                                      icon:
+                                        - width: 18px
+                                        - color: '#44739e'
+                                      name:
+                                        - justify-self: start
+                                        - font-size: 15px
+                                        - font-weight: 800
+                                network_grid:
+                                  card:
+                                    type: custom:button-card
+                                    show_name: false
+                                    show_icon: false
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 0
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"download upload"'
+                                        - grid-template-columns: repeat(2, minmax(0, 1fr))
+                                        - gap: 4px
+                                    custom_fields:
+                                      download:
+                                        card:
+                                          type: custom:button-card
+                                          entity: >-
+                                            sensor.system_monitor_debit_du_reseau_entrant_via_end0
+                                          name: Téléchargement
+                                          icon: mdi:download
+                                          tap_action:
+                                            action: more-info
+                                          custom_fields:
+                                            value: |
+                                              [[[
+                                                const sensor =
+                                                  states['sensor.system_monitor_debit_du_reseau_entrant_via_end0'];
+                                                const value = sensor?.state;
+                                                const unit = sensor?.attributes?.unit_of_measurement || '';
+                                                return `${value ?? '—'}${unit ? ` ${unit}` : ''}`;
+                                              ]]]
+                                            bar: |
+                                              [[[
+                                                const raw =
+                                                  states['sensor.system_monitor_debit_du_reseau_entrant_via_end0']?.state;
+                                                const value =
+                                                  Number.parseFloat(String(raw ?? '').replace(',', '.'));
+                                                const percent =
+                                                  Number.isFinite(value)
+                                                    ? Math.max(0, Math.min(100, value))
+                                                    : 0;
+
+                                                return `
+                                                  <div style="position:relative;width:100%;height:13px;border-radius:999px;overflow:hidden;background:rgba(127,127,127,.18)">
+                                                    <div style="width:${percent}%;height:100%;background:#55c878;transition:width .35s ease"></div>
+                                                    <div style="position:absolute;inset:1px 6px;display:flex;align-items:center;justify-content:flex-start;font-size:13px;font-weight:800">${Math.round(percent)} %</div>
+                                                  </div>
+                                                `;
+                                              ]]]
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(85,200,120,.20)
+                                              - box-shadow: none
+                                              - background: rgba(85,200,120,.055)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: '#55c878'
+                                            grid:
+                                              - grid-template-areas: '"i n value" "bar bar bar"'
+                                              - grid-template-columns: 24px 1fr auto
+                                              - grid-template-rows: auto 11px
+                                              - column-gap: 4px
+                                              - row-gap: 4px
+                                            icon:
+                                              - width: 24px
+                                              - color: '#55c878'
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            custom_fields:
+                                              value:
+                                                - justify-self: end
+                                                - font-size: 14px
+                                                - font-weight: 700
+                                              bar:
+                                                - width: 100%
+                                      upload:
+                                        card:
+                                          type: custom:button-card
+                                          entity: >-
+                                            sensor.system_monitor_debit_du_reseau_sortant_via_end0
+                                          name: Téléversement
+                                          icon: mdi:upload
+                                          tap_action:
+                                            action: more-info
+                                          custom_fields:
+                                            value: |
+                                              [[[
+                                                const sensor =
+                                                  states['sensor.system_monitor_debit_du_reseau_sortant_via_end0'];
+                                                const value = sensor?.state;
+                                                const unit = sensor?.attributes?.unit_of_measurement || '';
+                                                return `${value ?? '—'}${unit ? ` ${unit}` : ''}`;
+                                              ]]]
+                                            bar: |
+                                              [[[
+                                                const raw =
+                                                  states['sensor.system_monitor_debit_du_reseau_sortant_via_end0']?.state;
+                                                const value =
+                                                  Number.parseFloat(String(raw ?? '').replace(',', '.'));
+                                                const percent =
+                                                  Number.isFinite(value)
+                                                    ? Math.max(0, Math.min(100, value))
+                                                    : 0;
+
+                                                return `
+                                                  <div style="position:relative;width:100%;height:13px;border-radius:999px;overflow:hidden;background:rgba(127,127,127,.18)">
+                                                    <div style="width:${percent}%;height:100%;background:#ee7023;transition:width .35s ease"></div>
+                                                    <div style="position:absolute;inset:1px 6px;display:flex;align-items:center;justify-content:flex-start;font-size:13px;font-weight:800">${Math.round(percent)} %</div>
+                                                  </div>
+                                                `;
+                                              ]]]
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(238,112,35,.20)
+                                              - box-shadow: none
+                                              - background: rgba(238,112,35,.055)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: '#ee7023'
+                                            grid:
+                                              - grid-template-areas: '"i n value" "bar bar bar"'
+                                              - grid-template-columns: 24px 1fr auto
+                                              - grid-template-rows: auto 11px
+                                              - column-gap: 4px
+                                              - row-gap: 4px
+                                            icon:
+                                              - width: 24px
+                                              - color: '#ee7023'
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            custom_fields:
+                                              value:
+                                                - justify-self: end
+                                                - font-size: 14px
+                                                - font-weight: 700
+                                              bar:
+                                                - width: 100%
+                                power_title:
+                                  card:
+                                    type: custom:button-card
+                                    name: Alimentation
+                                    icon: mdi:power-plug-outline
+                                    show_icon: true
+                                    show_name: true
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 1px 2px 0
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"i n"'
+                                        - grid-template-columns: 25px 1fr
+                                      icon:
+                                        - width: 18px
+                                        - color: '#44739e'
+                                      name:
+                                        - justify-self: start
+                                        - font-size: 15px
+                                        - font-weight: 800
+                                power_grid:
+                                  card:
+                                    type: custom:button-card
+                                    show_name: false
+                                    show_icon: false
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 0
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"power"'
+                                        - grid-template-columns: 1fr
+                                    custom_fields:
+                                      power:
+                                        card:
+                                          type: custom:button-card
+                                          entity: binary_sensor.rpi_power_status
+                                          name: État de l’alimentation 24h
+                                          icon: mdi:raspberry-pi
+                                          show_label: true
+                                          label: |-
+                                            [[[
+                                              const state =
+                                                states['binary_sensor.rpi_power_status']
+                                                  ?.state;
+
+                                              if (state === 'off') return 'OK';
+                                              if (state === 'on') return 'Danger';
+                                              return 'Indisponible';
+                                            ]]]
+                                          tap_action:
+                                            action: more-info
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 5px 8px
+                                              - border-radius: 12px
+                                              - border: |-
+                                                  [[[
+                                                    const state = states['binary_sensor.rpi_power_status']?.state;
+                                                    return state === 'off'
+                                                      ? '1px solid rgba(85,200,120,.25)'
+                                                      : state === 'on'
+                                                        ? '1px solid rgba(230,107,107,.24)'
+                                                        : '1px solid rgba(127,127,127,.14)';
+                                                  ]]]
+                                              - box-shadow: none
+                                              - background: |-
+                                                  [[[
+                                                    const state = states['binary_sensor.rpi_power_status']?.state;
+                                                    return state === 'off'
+                                                      ? 'rgba(85,200,120,.13)'
+                                                      : state === 'on'
+                                                        ? 'rgba(230,107,107,.10)'
+                                                        : 'rgba(127,127,127,.055)';
+                                                  ]]]
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: |-
+                                                  [[[
+                                                    const state = states['binary_sensor.rpi_power_status']?.state;
+                                                    if (state === 'off') return '#55c878';
+                                                    if (state === 'on') return '#e66b6b';
+                                                    return '#7d8a96';
+                                                  ]]]                          
+                                            grid:
+                                              - grid-template-areas: '"i n l" "history history history"'
+                                              - grid-template-columns: 30px 1fr auto
+                                              - grid-template-rows: auto 17px
+                                              - row-gap: 4px
+                                            icon:
+                                              - width: 24px
+                                              - color: |-
+                                                  [[[
+                                                    const state = states['binary_sensor.rpi_power_status']?.state;
+                                                    if (state === 'off') return '#55c878';
+                                                    if (state === 'on') return '#e66b6b';
+                                                    return '#7d8a96';
+                                                  ]]]
+                                            name:
+                                              - justify-self: start
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            label:
+                                              - justify-self: end
+                                              - font-size: 14px
+                                              - font-weight: 700
+                                              - color: |-
+                                                  [[[
+                                                    const state = states['binary_sensor.rpi_power_status']?.state;
+                                                    if (state === 'off') return '#55c878';
+                                                    if (state === 'on') return '#e66b6b';
+                                                    return '#7d8a96';
+                                                  ]]]
+                                            custom_fields:
+                                              history:
+                                                - width: 100%
+                                                - height: 17px
+                                                - align-self: center
+                                                - overflow: visible
+                                          custom_fields:
+                                            history: |-
+                                              [[[
+                                                return `
+                                                  <iframe
+                                                    src="/local/rpi_power_history_24h_sans_scintillement.html?v=2"
+                                                    title="Historique de l’alimentation sur 48 heures"
+                                                    loading="eager"
+                                                    style="
+                                                      display:block;
+                                                      width:100%;
+                                                      height:17px;
+                                                      border:0;
+                                                      margin:0;
+                                                      padding:0;
+                                                      overflow:hidden;
+                                                      background:transparent;
+                                                    ">
+                                                  </iframe>
+                                                `;
+                                              ]]]
+                                backup_title:
+                                  card:
+                                    type: custom:button-card
+                                    name: Sauvegarde OneDrive
+                                    icon: mdi:microsoft-access
+                                    show_icon: true
+                                    show_name: true
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 1px 2px 0
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"i n"'
+                                        - grid-template-columns: 25px 1fr
+                                      icon:
+                                        - width: 18px
+                                        - color: '#44739e'
+                                      name:
+                                        - justify-self: start
+                                        - font-size: 15px
+                                        - font-weight: 800
+                                backup_grid:
+                                  card:
+                                    type: custom:button-card
+                                    show_name: false
+                                    show_icon: false
+                                    tap_action:
+                                      action: none
+                                    styles:
+                                      card:
+                                        - padding: 0
+                                        - border: none
+                                        - box-shadow: none
+                                        - background: transparent
+                                      grid:
+                                        - grid-template-areas: '"status last next"'
+                                        - grid-template-columns: repeat(3, minmax(0, 1fr))
+                                        - gap: 4px
+                                    custom_fields:
+                                      status:
+                                        card:
+                                          type: custom:button-card
+                                          entity: event.backup_automatic_backup
+                                          name: État
+                                          icon: mdi:cloud-sync-outline
+                                          show_label: true
+                                          label: |-
+                                            [[[
+                                              const event =
+                                                states['event.backup_automatic_backup'];
+                                              const value =
+                                                event?.attributes?.event_type;
+
+                                              if (value === 'completed') return 'Terminé';
+                                              if (value === 'failed') return 'Échoué';
+                                              if (value === 'started' || value === 'in_progress') return 'En cours';
+                                              return 'Indisponible';
+                                            ]]]
+                                          tap_action:
+                                            action: more-info
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 2px
+                                              - border-radius: 12px
+                                              - border: |-
+                                                  [[[
+                                                    const value =
+                                                      states['event.backup_automatic_backup']
+                                                        ?.attributes?.event_type;
+
+                                                    if (value === 'completed')
+                                                      return '1px solid rgba(85,200,120,.22)';
+                                                    if (value === 'failed')
+                                                      return '1px solid rgba(230,107,107,.22)';
+                                                    if (value === 'started' || value === 'in_progress')
+                                                      return '1px solid rgba(68,115,158,.22)';
+
+                                                    return '1px solid rgba(127,127,127,.14)';
+                                                  ]]]
+                                              - box-shadow: none
+                                              - background: |-
+                                                  [[[
+                                                    const value =
+                                                      states['event.backup_automatic_backup']
+                                                        ?.attributes?.event_type;
+
+                                                    if (value === 'completed')
+                                                      return 'rgba(85,200,120,.08)';
+                                                    if (value === 'failed')
+                                                      return 'rgba(230,107,107,.08)';
+                                                    if (value === 'started' || value === 'in_progress')
+                                                      return 'rgba(68,115,158,.08)';
+
+                                                    return 'rgba(127,127,127,.055)';
+                                                  ]]]
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: |-
+                                                  [[[
+                                                    const value =
+                                                      states['event.backup_automatic_backup']
+                                                        ?.attributes?.event_type;
+
+                                                    if (value === 'completed')
+                                                      return 'rgb(85,200,120)';
+                                                    if (value === 'failed')
+                                                      return 'rgb(230,107,107)';
+                                                    if (value === 'started' || value === 'in_progress')
+                                                      return 'rgb(68,115,158)';
+
+                                                    return 'rgb(127,127,127)';
+                                                  ]]]                         
+                                            grid:
+                                              - grid-template-areas: '"i" "n" "l"'
+                                              - grid-template-rows: 23px 14px 14px
+                                              - row-gap: 1px
+                                            icon:
+                                              - width: 23px
+                                              - justify-self: center
+                                              - color: |-
+                                                  [[[
+                                                    const value =
+                                                      states['event.backup_automatic_backup']
+                                                        ?.attributes?.event_type;
+
+                                                    if (value === 'completed') return '#55c878';
+                                                    if (value === 'failed') return '#e66b6b';
+                                                    if (value === 'started' || value === 'in_progress') return '#44739e';
+                                                    return '#7d8a96';
+                                                  ]]]
+                                            name:
+                                              - justify-self: center
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            label:
+                                              - justify-self: center
+                                              - font-size: 12px
+                                              - color: |-
+                                                  [[[
+                                                    const value =
+                                                      states['event.backup_automatic_backup']
+                                                        ?.attributes?.event_type;
+
+                                                    if (value === 'completed') return '#55c878';
+                                                    if (value === 'failed') return '#e66b6b';
+                                                    if (value === 'started' || value === 'in_progress') return '#44739e';
+                                                    return '#7d8a96';
+                                                  ]]]
+                                      last:
+                                        card:
+                                          type: custom:button-card
+                                          entity: >-
+                                            sensor.backup_last_successful_automatic_backup
+                                          name: Dernière
+                                          icon: mdi:backup-restore
+                                          show_label: true
+                                          label: |-
+                                            [[[
+                                              const raw = states['sensor.backup_last_successful_automatic_backup']?.state;
+
+                                              if (!raw || ['unknown','unavailable'].includes(raw)) {
+                                                return '—';
+                                              }
+
+                                              const date = new Date(raw);
+                                              if (Number.isNaN(date.getTime())) return raw;
+
+                                              return date.toLocaleDateString('fr-FR', {
+                                                day: '2-digit',
+                                                month: '2-digit',
+                                                year: '2-digit'
+                                              });
+                                            ]]]
+                                          tap_action:
+                                            action: more-info
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 2px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(85,200,120,.18)
+                                              - box-shadow: none
+                                              - background: rgba(85,200,120,.06)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: '#55c878'
+                                            grid:
+                                              - grid-template-areas: '"i" "n" "l"'
+                                              - grid-template-rows: 23px 14px 14px
+                                              - row-gap: 1px
+                                            icon:
+                                              - width: 23px
+                                              - justify-self: center
+                                              - color: '#55c878'
+                                            name:
+                                              - justify-self: center
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            label:
+                                              - justify-self: center
+                                              - font-size: 12px
+                                              - color: '#55c878'
+                                      next:
+                                        card:
+                                          type: custom:button-card
+                                          entity: >-
+                                            sensor.backup_next_scheduled_automatic_backup
+                                          name: Prochaine
+                                          icon: mdi:calendar-clock
+                                          show_label: true
+                                          label: |-
+                                            [[[
+                                              const raw = states['sensor.backup_next_scheduled_automatic_backup']?.state;
+
+                                              if (!raw || ['unknown','unavailable'].includes(raw)) {
+                                                return '—';
+                                              }
+
+                                              const date = new Date(raw);
+                                              if (Number.isNaN(date.getTime())) return raw;
+
+                                              return date.toLocaleDateString('fr-FR', {
+                                                day: '2-digit',
+                                                month: '2-digit',
+                                                year: '2-digit'
+                                              });
+                                            ]]]
+                                          tap_action:
+                                            action: more-info
+                                          styles:
+                                            card:
+                                              - height: 58px
+                                              - min-height: 58px
+                                              - max-height: 58px
+                                              - box-sizing: border-box
+                                              - overflow: hidden
+                                              - padding: 2px
+                                              - border-radius: 12px
+                                              - border: 1px solid rgba(238,154,35,.18)
+                                              - box-shadow: none
+                                              - background: rgba(238,154,35,.06)
+                                              - --button-card-ripple-hover-opacity: 0.2
+                                              - --button-card-ripple-pressed-opacity: 0.3
+                                              - --button-card-ripple-color: '#ee9a23'
+                                            grid:
+                                              - grid-template-areas: '"i" "n" "l"'
+                                              - grid-template-rows: 23px 14px 14px
+                                              - row-gap: 1px
+                                            icon:
+                                              - width: 23px
+                                              - justify-self: center
+                                              - color: '#ee9a23'
+                                            name:
+                                              - justify-self: center
+                                              - font-size: 13px
+                                              - font-weight: 700
+                                            label:
+                                              - justify-self: center
+                                              - font-size: 12px
+                                              - color: '#ee9a23'
+
+                  
+                    
