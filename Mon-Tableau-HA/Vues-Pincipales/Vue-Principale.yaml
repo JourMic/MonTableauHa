@@ -19,31 +19,24 @@ sections:
           columns: full
           rows: 0.3
 
-      - type: custom:weather-forecast-card
-        show_current: true
-        show_forecast: true
-        default_forecast: hourly
-        tap_action:
-          action: more-info
-        entity: weather.pirateweather
-        name: Shawinigan-Sud
-        show_condition_effects: false
-        temperature_entity: sensor.st_00032986_temperature
-        forecast:
-          mode: simple
-          show_sun_times: true
-          default_chart_attribute: temperature_and_precipitation
-          extra_attribute: precipitation_probability
-          scroll_to_selected: true
-          use_color_thresholds: true
-          show_attribute_selector: true
-        forecast_action:
-          tap_action:
-            action: toggle-forecast
-          hold_action:
-            action: select-forecast-attribute
-        current:
-          temperature_precision: 0
+      - type: custom:sun-weather-card
+        entity: weather.forecast_shawinigan_sud
+        sun_entity: sun.sun
+        language: system
+        time_format: '24'
+        forecast_type: hourly
+        forecast_layout: graph
+        forecast_days: 7
+        transparent: false
+        background_overlay: 0
+        show_arc: false
+        details: []
+        show_time: false
+        show_date: false
+        visible_rows: 10
+        show_forecast_toggle: false
+        animated_icons: false
+        location: Shawinigan
         grid_options:
           columns: 12
           rows: auto
@@ -201,107 +194,39 @@ sections:
 
   - type: grid
     cards:
+    
       - type: heading
-        heading: Agenda
+        heading: Calendrier
         icon: mdi:calendar-month-outline
         grid_options:
           columns: full
           rows: 0.3
 
-      - type: custom:calendar-card-pro
-        entities:
-          - entity: calendar.agenda_de_michel
-            color: white
-          - entity: calendar.sports_de_michel
-            color: yellow
-          - entity: calendar.anniversaires_de_michel
-            color: orange
-          - entity: calendar.anniversaires
-            color: orange
-          - entity: calendar.jours_feries_de_michel
-            color: cyan
-        days_to_show: 20
-        compact_days_to_show: 3
-        compact_events_to_show: 5
-        compact_events_complete_days: true
-        language: fr
-        accent_color: "#baf1ff"
-        vertical_line_width: 5px
-        event_spacing: 5px
-        show_current_week_number: false
-        day_separator_width: 2px
-        day_separator_color: "#baf1ff80"
-        week_separator_width: 1px
-        month_separator_width: 1.5px
-        month_separator_color: var(--secondary-text-color)
-        today_indicator: 🔴
-        date_vertical_alignment: ""
-        weekday_font_size: 15px
-        weekday_color: "#baf1ff"
-        day_font_size: 25px
-        day_color: "#baf1ff"
-        month_color: "#baf1ff"
-        weekend_weekday_color: "#E67C73"
-        weekend_day_color: "#E67C73"
-        weekend_month_color: "#E67C73"
-        today_day_color: red
-        show_progress_bar: false
-        progress_bar_color: "#03a9f4"
-        progress_bar_height: 10px
-        event_color: "#baf1ff"
-        time_24h: true
-        time_color: "#baf1ff"
-        time_icon_size: 15px
-        refresh_interval: 15
-        row_spacing: 10px
-        remove_location_country_selector: "false"
-        tap_action:
-          action: expand
+      - type: custom:calendar-tasks-card
+        calendars:
+          - calendar.agenda_de_michel
+          - calendar.sports_de_michel
+          - calendar.anniversaires_de_michel
+          - calendar.anniversaires
+          - calendar.jours_feries_de_michel
+        todos:
+          - todo.mes_taches
+        title: Agenda de Michel
+        show_add_event: true
+        days: 30
+        allow_complete: true
+        limit_events_visible: true
+        max_events_visible: 3
+        compact_mode: true
+        grid_options:
+          columns: 12
+          rows: 4.1
         card_mod:
           style: |
             ha-card {
               box-shadow: var(--couleur_ombre_bleu) !important;
             }
-            /* Make today's events stand out */
-            .day-table.today .event-title {
-              font-size: 16px !important;     /* Larger text */
-              font-weight: bold !important;   /* Bold text */
-              color: red !important; /* Use theme accent color */
-            }
-
-            div.event-content {
-              display: grid;
-              grid-template-areas: 
-              "title time"
-              "location location";
-              grid-template-columns: 1fr auto;
-              column-gap: 10px;
-              row-gap: 0px;
-            }
-
-            div.summary {
-              grid-area: title;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-
-            div.time {
-              grid-area: time;
-              white-space: nowrap;
-            }
-
-            div.location {
-              grid-area: location;
-              white-space: normal;
-              overflow: hidden;
-              text-overflow: ellipsis;
-             }
-
-            div.time-location {
-              display: contents;
-            }
-
-
+            
       - type: heading
         icon: mdi:cctv
         heading: Caméras
@@ -712,6 +637,284 @@ badges:
                     entity: sensor.nombre_de_mise_a_jour_hacs
                     state_not: "0"
 
+              - type: custom:button-card
+                entity: update.home_assistant_core_update
+                show_name: false
+                show_icon: false
+                show_state: false
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                styles:
+                  card:
+                    - padding: 0
+                    - border-radius: 12px
+                    - overflow: hidden
+                    - background: var(--ha-card-background, var(--card-background-color))
+                    - box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14)
+                  grid:
+                    - grid-template-areas: '"hero" "content"'
+                    - grid-template-columns: 1fr
+                    - grid-template-rows: auto auto
+                custom_fields:
+                  hero:
+                    card:
+                      type: custom:button-card
+                      entity: update.home_assistant_core_update
+                      name: Home Assistant
+                      icon: mdi:home-assistant
+                      show_name: true
+                      show_icon: true
+                      show_label: true
+                      label: |-
+                        [[[
+                          const core = states['update.home_assistant_core_update'];
+                          const version = core?.attributes?.installed_version || 'Version inconnue';
+                          return `<span>Serveur domotique</span><br><span style="font-size:14px">Core ${version}</span>`;
+                        ]]]
+                      tap_action:
+                        action: more-info
+                      custom_fields:
+                        status: |-
+                          [[[
+                            const items = [
+                              ['Core','update.home_assistant_core_update'],
+                              ['Supervisor','update.home_assistant_supervisor_update'],
+                              ['OS','update.home_assistant_operating_system_update']
+                            ];
+                            const dot = (label,id) => {
+                              const s = states[id]?.state;
+                              const c = s === 'on' ? '#ee9a23' : s === 'off' ? '#55c878' : '#7d8a96';
+                              return `<span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:${c}"></span>${label}</span>`;
+                            };
+                            return `<div style="display:flex;gap:7px;padding:4px 7px;border-radius:999px;background:rgba(0,0,0,.30);font-size:11px;font-weight:700">${items.map(x => dot(x[0],x[1])).join('')}</div>`;
+                          ]]]
+                        hint: Appuyer pour ouvrir les détails de Home Assistant
+                      styles:
+                        card:
+                          - min-height: 98px
+                          - padding: 10px
+                          - border-radius: 0
+                          - border: none
+                          - box-shadow: none
+                          - color: white
+                          - background-image: >-
+                              linear-gradient(115deg, rgba(20,27,36,.55),
+                              rgba(68,115,158,.12)),
+                              url('/local/images/home-assistant1.png')
+                          - background-size: cover, 100% auto
+                          - background-position: center, center top -18px
+                          - background-repeat: no-repeat, no-repeat
+                          - --button-card-ripple-hover-opacity: 0.2
+                          - --button-card-ripple-pressed-opacity: 0.3
+                          - --button-card-ripple-color: dodgerblue
+                        grid:
+                          - grid-template-areas: '"n i status" "l l l" "hint hint hint"'
+                          - grid-template-columns: max-content 36px 1fr
+                          - grid-template-rows: auto auto auto
+                          - column-gap: 5px
+                          - row-gap: 1px
+                        icon:
+                          - width: 30px
+                          - color: dodgerblue
+                          - justify-self: start
+                          - align-self: center
+                          - transform: translateY(-3px)
+                        name:
+                          - justify-self: start
+                          - align-self: center
+                          - font-size: 22px
+                          - font-weight: 800
+                          - letter-spacing: -0.4px
+                        label:
+                          - justify-self: start
+                          - text-align: left
+                          - font-size: 14px
+                          - line-height: 1.3
+                          - opacity: 1
+                        custom_fields:
+                          status:
+                            - align-self: start
+                            - justify-self: end
+                          hint:
+                            - justify-self: start
+                            - margin-top: 2px
+                            - font-size: 11px
+                            - opacity: 1
+                  content:
+                    card:
+                      type: custom:button-card
+                      show_name: false
+                      show_icon: false
+                      tap_action:
+                        action: none
+                      styles:
+                        card:
+                          - padding: 6px
+                          - border: none
+                          - border-radius: 0
+                          - box-shadow: none
+                          - background: transparent
+                        grid:
+                          - grid-template-areas: >-
+                              "system_title" "system_grid" "apps_title"
+                              "apps_grid"
+                          - grid-template-columns: 1fr
+                          - grid-template-rows: repeat(4, auto)
+                          - row-gap: 4px
+                      custom_fields:
+                        system_title:
+                          card:
+                            type: custom:button-card
+                            name: Mises à jour système
+                            icon: mdi:update
+                            show_icon: true
+                            show_name: true
+                            tap_action:
+                              action: none
+                            styles:
+                              card:
+                                - padding: 1px 2px 0
+                                - border: none
+                                - box-shadow: none
+                                - background: transparent
+                              grid:
+                                - grid-template-areas: '"i n"'
+                                - grid-template-columns: 25px 1fr
+                              icon:
+                                - width: 18px
+                                - color: '#44739e'
+                              name:
+                                - justify-self: start
+                                - font-size: 15px
+                                - font-weight: 800
+                        system_grid:
+                          card:
+                            type: custom:button-card
+                            show_name: false
+                            show_icon: false
+                            tap_action:
+                              action: none
+                            styles:
+                              card:
+                                - padding: 0
+                                - border: none
+                                - box-shadow: none
+                                - background: transparent
+                              grid:
+                                - grid-template-areas: '"core supervisor os"'
+                                - grid-template-columns: repeat(3, minmax(0, 1fr))
+                                - gap: 4px
+                            custom_fields:
+                              core:
+                                card:
+                                  type: custom:button-card
+                                  entity: update.home_assistant_core_update
+                                  name: HA Core
+                                  template: haupdate
+                              supervisor:
+                                card:
+                                  type: custom:button-card
+                                  entity: update.home_assistant_supervisor_update
+                                  name: HA Supervisor
+                                  template: haupdate
+                              os:
+                                card:
+                                  type: custom:button-card
+                                  entity: >-
+                                    update.home_assistant_operating_system_update
+                                  name: HA OS
+                                  template: haupdate
+                        apps_title:
+                          card:
+                            type: custom:button-card
+                            name: Applications
+                            icon: mdi:application
+                            show_icon: true
+                            show_name: true
+                            tap_action:
+                              action: none
+                            styles:
+                              card:
+                                - padding: 1px 2px 0
+                                - border: none
+                                - box-shadow: none
+                                - background: transparent
+                              grid:
+                                - grid-template-areas: '"i n"'
+                                - grid-template-columns: 25px 1fr
+                              icon:
+                                - width: 18px
+                                - color: '#44739e'
+                              name:
+                                - justify-self: start
+                                - font-size: 15px
+                                - font-weight: 800
+                        apps_grid:
+                          card:
+                            type: custom:button-card
+                            show_name: false
+                            show_icon: false
+                            tap_action:
+                              action: none
+                            styles:
+                              card:
+                                - padding: 0
+                                - border: none
+                                - box-shadow: none
+                                - background: transparent
+                              grid:
+                                - grid-template-areas: '"file_editor terminal hacs vscode ."'
+                                - grid-template-columns: repeat(4, minmax(0, 1fr))
+                                - gap: 4px
+                            custom_fields:
+                              file_editor:
+                                card:
+                                  type: custom:button-card
+                                  entity: update.file_editor_mise_a_jour
+                                  name: File Editor
+                                  template: update
+                                  size: 50%
+                                  tap_action:
+                                    action: more-info
+                                  hold_action:
+                                    action: more-info
+                              terminal:
+                                card:
+                                  type: custom:button-card
+                                  entity: update.advanced_ssh_web_terminal_mise_a_jour
+                                  name: Terminal SSH
+                                  template: update
+                                  size: 50%
+                                  tap_action:
+                                    action: more-info
+                                  hold_action:
+                                    action: more-info
+                              hacs:
+                                card:
+                                  type: custom:button-card
+                                  entity: update.hacs_update
+                                  name: HACS
+                                  template: update
+                                  size: 50%
+                                  tap_action:
+                                    action: more-info
+                                  hold_action:
+                                    action: more-info
+                              vscode:
+                                card:
+                                  type: custom:button-card
+                                  entity: update.studio_code_server_mise_a_jour
+                                  name: Vscode
+                                  template: update
+                                  size: 50%
+                                  tap_action:
+                                    action: more-info
+                                  hold_action:
+                                    action: more-info
+
+
   - type: entity
     show_name: true
     show_state: true
@@ -906,3 +1109,5 @@ badges:
             state: "1"
     tap_action:
       action: none
+
+
