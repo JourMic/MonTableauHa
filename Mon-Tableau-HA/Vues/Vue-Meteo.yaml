@@ -309,36 +309,31 @@ sections:
         heading: Prévisions
         grid_options:
           columns: full
-          rows: 0.5
+          rows: 0.3
 
-      - type: custom:weather-forecast-card
+      - type: custom:sun-weather-card
         entity: weather.pirateweather
-        show_current: true
-        show_forecast: true
-        name: Shawinigan-Sud
-        default_forecast: daily
-        show_condition_effects: true
-        current:
-          show_attributes:
-            - name: humidity
-              entity: sensor.st_00032986_humidite
-            - name: pressure
-              entity: sensor.st_00032986_pression_atmospherique
-            - name: uv_index
-              entity: sensor.st_00032986_index_uv
-            - name: visibility
-              entity: sensor.shawinigan_sud_sensors_visibility
-          secondary_info_attribute: apparent_temperature
-          temperature_entity: sensor.st_00032986_temperature
-          temperature_precision: 1
-        forecast:
-          mode: chart
-          extra_attribute: wind_direction
-          scroll_to_selected: true
-          use_color_thresholds: true
-          daily_slots: 7
-          show_attribute_selector: false
-          temperature_precision: 1
+        details:
+          - humidity
+          - wind_speed
+          - precipitation_probability
+          - pressure
+          - wind_bearing
+          - precipitation
+          - visibility
+          - dew_point
+          - apparent_temperature
+          - cloud_coverage
+          - sunrise
+          - sunset
+        show_forecast_toggle: false
+        visible_rows: 5
+        transparent: false
+        forecast_layout: bars
+        location: Shawinigan
+        show_time: false
+        show_date: false
+        background_overlay: 0
         card_mod:
           style: |
             ha-card {
@@ -717,7 +712,7 @@ sections:
         heading: Vent
         grid_options:
           columns: full
-          rows: 0.5
+          rows: 0.3
 
       - type: custom:windrose-card
         title: Direction du vent
